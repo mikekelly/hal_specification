@@ -50,6 +50,7 @@ table {
 /* HAL.css */
 body {
   font-family: sans-serif;
+  font-size: 20px;
 }
 
 h1, h2, h3 {
@@ -97,6 +98,10 @@ ul {
   list-style-type: disc;
 }
 
+strong {
+  font-weight: bold;
+}
+
 #wrapper {
   margin: 30px;
   width: 960px;
@@ -113,4 +118,8 @@ ul {
   padding: 0.2em 1em;
   background-color: #E3E3E3;
   border: 1px solid #999;
+}
+
+#examples .gist {
+  font-size: 14px;
 }

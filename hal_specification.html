@@ -56,8 +56,9 @@
         The difference between HTML and HAL is that the former is GUI based and designed to be consumed by people, and the latter is machine-readable and designed to be consumed by automated 'agents'.
         </p>
         <p>
-        HAL consists of two reserved elements: <strong>Resource</strong> and <strong>Link</strong>. Any and all elements are legal in a HAL representation provided they do not conflict with HAL's reserved elements.
+          HAL has two main components: Resources and Links. Resources have their own state, links, and embedded resources (which are resources in their own right). Links map link relations to href values/URIs, in a key/value fashion. Below is an image illustrating this information model:
         </p>
+          <img src="info-model.png" />
         <p>
         HAL is a media type with which applications are described and controlled via link relations. It encourages the use of link relations to:
         </p>
