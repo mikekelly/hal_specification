@@ -38,11 +38,121 @@ HAL encourages the use of link relations to:
 
 Here is how you could represent a collection of orders with the JSON variant of HAL:
 
-<script src="https://gist.github.com/1027127.js?file=hal_example.json"></script>
+```javascript
+{
+  "_links": {
+    "self": { "href": "/orders" },
+    "next": { "href": "/orders?page=2" },
+    "search": { "href": "/orders?id={order_id}" }
+  },
+  "_embedded": {
+    "order": [
+      {
+        "_links": {
+          "self": { "href": "/orders/123" },
+          "customer": { "href": "/customer/bob", "title": "Bob Jones <bob@jones.com>" }
+        },
+        "total": 30.00,
+        "currency": "USD",
+        "status": "shipped",
+        "placed": "2011-01-16",
+        "_embedded": {
+          "basket": {
+            "_links": {
+              "self": { "href": "/orders/123/basket" }
+            },
+            "items": [
+              {
+                "sku": "ABC123",
+                "quantity": 2,
+                "price": 9.50
+              },{
+                "sku": "GFZ111",
+                "quantity": 1,
+                "price": 11
+              }
+            ]
+          }
+        }
+      },{
+        "_links": {
+          "self": { "href": "/orders/124" },
+          "customer": { "href": "/customer/jen", "title": "Jen Harris <jen@internet.com>" }
+        },
+        "total": 20.00,
+        "currency": "USD",
+        "status": "processing",
+        "placed": "2011-01-16",
+        "_embedded": {
+          "basket": {
+            "_links": {
+              "self": { "href": "/orders/124/basket" }
+            },
+            "items": [
+              {
+                "sku": "KLM222",
+                "quantity": 1,
+                "price": 9.00
+              },{
+                "sku": "HHI50",
+                "quantity": 1,
+                "price": 11.00
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}
+```
 
 Here is the same example using the XML variant of HAL:
 
-<script src="https://gist.github.com/572481.js?file=hal-example.xml"></script>
+```xml
+<resource href="/orders">
+  <link rel="next" href="/orders?page=2" />
+  <link rel="search" href="/orders?id={order_id}" />
+  <resource rel="order" href="/orders/123">
+    <link rel="customer" href="/customer/bob" title="Bob Jones <bob@jones.com>" />
+    <resource rel="basket" href="/orders/123/basket">
+      <item>
+        <sku>ABC123</sku>
+        <quantity>2</quantity>
+        <price>9.50</price>
+      </item>
+      <item>
+        <sku>GFZ111</sku>
+        <quantity>1</quantity>
+        <price>11.00</price>
+      </item>
+    </resource>
+    <total>30.00</total>
+    <currency>USD</currency>
+    <status>shipped</status>
+    <placed>2011-01-16</placed>
+  </resource>
+  <resource rel="order" href="/orders/124">
+    <link rel="customer" href="/customer/jen" title="Jen Harris <jen@internet.com>" />
+    <resource rel="basket" href="/orders/124/basket">
+      <item>
+        <sku>KLM222</sku>
+        <quantity>1</quantity>
+        <price>9.00</price>
+      </item>
+      <item>
+        <sku>HHI50</sku>
+        <quantity>1</quantity>
+        <price>11.00</price>
+      </item>
+    </resource>
+    <total>20.00</total>
+    <currency>USD</currency>
+    <status>processing</status>
+    <placed>2011-01-16</placed>
+  </resource>
+</resource>
+```
 
 ## Compliance
 
@@ -99,37 +209,37 @@ The **Resource** and **Link** elements share the following attributes:
 
 Note: the following attributes have corresponding [target attributes][9]' as defined in [Web Linking [RFC 5988]][7]
 
-*  @hreflang
+*   #### @hreflang
   
-   OPTIONAL
+    OPTIONAL
 
-   For indicating what the language of the result of dereferencing the link should be.
+    For indicating what the language of the result of dereferencing the link should be.
 
-*  @title
+*   @title
    
-   OPTIONAL
+    OPTIONAL
 
-   For labeling the destination of a link with a human-readable identifier.
+    For labeling the destination of a link with a human-readable identifier.
 
 ### Link Attributes
 
 The following are attribute definitions applicable only to HAL's **Link** element.
 
-*  @href
+*   @href
 
-   REQUIRED
+    REQUIRED
 
-   This attribute MAY contain a URI template. Whether or not this is the case SHOULD be indicated to clients by the @rel value.
+    This attribute MAY contain a URI template. Whether or not this is the case SHOULD be indicated to clients by the @rel value.
 
 ### Resource Attributes
 
 The following are attribute definitions applicable only to HAL's **Resource** element.
 
-*   @href
+*    @href
     
-    REQUIRED
+     REQUIRED
     
-    Content embedded within a **Resource** element MAY be a full, partial, summary, or incorrect representation of the content available at the target URI. Applications which use HAL MAY clarify the integrity of specific embedded content via the description of the relevant **@rel** value.
+     Content embedded within a **Resource** element MAY be a full, partial, summary, or incorrect representation of the content available at the target URI. Applications which use HAL MAY clarify the integrity of specific embedded content via the description of the relevant **@rel** value.
 
 ## Constraints
 
@@ -150,9 +260,15 @@ Further details on the JSON variant of HAL:
 
 ## Minimum Valid Representation
 
-### XML
-
 ### JSON
+```javascript
+{ "_links": { "self": { "href": "http://example.com/" } } }
+```
+
+### XML
+```xml
+<resource href="http://example.com/" />
+```
 
 ## Recommendations
 
