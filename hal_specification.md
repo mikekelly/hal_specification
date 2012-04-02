@@ -2,27 +2,17 @@
 
 ## A lean hypermedia type for RESTful APIs
 
-Author:
-
-Mike Kelly ([mike@stateless.co][1])
-
-Dates:
-
-2011-06-13 (Created)
-
-2011-10-30 (Updated)
-
-Status:
-
-Initial Draft
+* __Author:__ Mike Kelly ([mike@stateless.co][1])
+* __Dates:__ 2011-06-13 (Created) 2012-04-02 (Updated)
+* __Status:__ Draft
 
 ### Discussion Group
 
-Join the **Hypertext Application Language** discussion group by visiting the group's [home page][2]. 
+If you have any questions or feedback about HAL, you can message the [HAL-discuss mailing list][2]. 
 
 ## General Description
 
-HAL is a lean, domain-agnostic hypermedia type in both JSON and XML, and is designed specifically for exposing RESTful hypermedia APIs. 
+HAL is a lean, simple, domain-agnostic hypermedia type for providing links in REST APIs. It can be serialized as both JSON and XML.
 
 Essentially, HAL provides a set of conventions for expressing hyperlinks to, and embeddedness of, related resources - the rest of a HAL representation is just plain old JSON or XML. 
 
@@ -33,6 +23,7 @@ This document contains a formalised specification of HAL. For a friendlier, more
 HAL has two main components: Resources and Links. Resources have their own state, links, and embedded resources (which are resources in their own right). Links primarily map link relations to URIs in a key/value fashion. Below is an image illustrating this information model: 
 
 ![The HAL Information model][4]
+
 HAL is a media type with which applications are meant to be developed and exposed as sets of traversable link relations. 
 
 Instead of using linkless JSON/XML or developing a custom media type, you can use HAL and focus on designing the link relations which drive your application. 
@@ -43,34 +34,38 @@ HAL encourages the use of link relations to:
 *   Infer the expected structure and meaning of target resources
 *   Signalling what requests and representations can be submitted to target resources
 
-## Goals
-
-*   Clarify HAL's design.
-*   Provide a specification against which to standardise.
-
 ## Examples
 
-Here is how you could represent a collection of orders with the JSON variant of HAL: 
+Here is how you could represent a collection of orders with the JSON variant of HAL:
 
-Here is the same example using the XML variant of HAL: 
+<script src="https://gist.github.com/1027127.js?file=hal_example.json"></script>
+
+Here is the same example using the XML variant of HAL:
+
+<script src="https://gist.github.com/572481.js?file=hal-example.xml"></script>
 
 ## Compliance
 
 An implementation is not compliant if it fails to satisfy one or more of the MUST or REQUIRED level requirements. An implementation that satisfies all the MUST or REQUIRED level and all the SHOULD level requirements is said to be "unconditionally compliant"; one that satisfies all the MUST level requirements but not all the SHOULD level requirements is said to be "conditionally compliant." 
 
-&gt; The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][5]. 
+> The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][5]. 
 
-## Components
+## Media Type Identifiers
+* __application/hal+json__
 
-HAL provides hypertext capabilities via two elements:
+  The JSON based variant of HAL
 
-1.  #### Resources
-    
-    For expressing the embedded nature of a given part of the representation.
+* __application/hal+xml__
 
-2.  #### Links
-    
-    For expressing 'outbound' hyperlinks to other, related URIs.
+  The XML based variant of HAL
+
+## JSON variant
+
+### Resource
+
+### Link
+
+## XML variant
 
 ### Shared Attributes
 
@@ -104,15 +99,33 @@ The **Resource** and **Link** elements share the following attributes:
 
 Note: the following attributes have corresponding [target attributes][9]' as defined in [Web Linking [RFC 5988]][7]
 
+*  @hreflang
+  
+   OPTIONAL
+
+   For indicating what the language of the result of dereferencing the link should be.
+
+*  @title
+   
+   OPTIONAL
+
+   For labeling the destination of a link with a human-readable identifier.
+
 ### Link Attributes
 
 The following are attribute definitions applicable only to HAL's **Link** element.
+
+*  @href
+
+   REQUIRED
+
+   This attribute MAY contain a URI template. Whether or not this is the case SHOULD be indicated to clients by the @rel value.
 
 ### Resource Attributes
 
 The following are attribute definitions applicable only to HAL's **Resource** element.
 
-*   #### @href
+*   @href
     
     REQUIRED
     
@@ -137,9 +150,9 @@ Further details on the JSON variant of HAL:
 
 ## Minimum Valid Representation
 
-**XML**
+### XML
 
-**JSON**
+### JSON
 
 ## Recommendations
 
@@ -151,7 +164,9 @@ For XML, the [CURIE syntax][10] MAY be used for brevity.
 
 For JSON, a 'curie' link can be used like so:
 
-    { ... '_links' : { 'curie': { 'href' : 'http://example.com/rels/{relation}', 'title': 'ex' }, ... }, ... }
+```javascript
+{ ... '_links' : { 'curie': { 'href' : 'http://example.com/rels/{relation}', 'title': 'ex' }, ... }, ... }
+```
 
 ## Extending HAL
 
