@@ -161,13 +161,13 @@ An implementation is not compliant if it fails to satisfy one or more of the MUS
 > The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][5]. 
 
 ## Media Type Identifiers
-* __application/hal+json__
+*   __application/hal+json__
 
-  The JSON based variant of HAL
+    The JSON based variant of HAL
 
-* __application/hal+xml__
+*   __application/hal+xml__
 
-  The XML based variant of HAL
+    The XML based variant of HAL
 
 ## JSON variant
 
@@ -181,15 +181,15 @@ An implementation is not compliant if it fails to satisfy one or more of the MUS
 
 The **Resource** and **Link** elements share the following attributes:
 
-*   #### @href
+*   __href__
     
     REQUIRED
     
     For indicating the target URI.
     
-    **@href** corresponds with the '[Target IRI][6]' as defined in [Web Linking [RFC 5988]][7]
+    **href** corresponds with the '[Target IRI][6]' as defined in [Web Linking [RFC 5988]][7]
 
-*   #### @rel
+*   __rel__
     
     REQUIRED
     
@@ -197,25 +197,25 @@ The **Resource** and **Link** elements share the following attributes:
     
     This attribute is not a requirement for the root element of a HAL representation, as it has an implicit default value of 'self'
     
-    **@rel** corresponds with the '[relation parameter][8]' as defined in [Web Linking [RFC 5988]][7]
+    **rel** corresponds with the '[relation parameter][8]' as defined in [Web Linking [RFC 5988]][7]
     
-    **@rel** attribute SHOULD be used for identifying **Resource** and **Link** elements in a HAL representation.
+    **rel** attribute SHOULD be used for identifying **Resource** and **Link** elements in a HAL representation.
 
-*   #### @name
+*   __name__
     
     OPTIONAL
     
-    For distinguishing between **Resource** and **Link** elements that share the same **@rel** value. The **@name** attribute SHOULD NOT be used exclusively for identifying elements within a HAL representation, it is intended only as a 'secondary key' to a given **@rel** value.
+    For distinguishing between **Resource** and **Link** elements that share the same **rel** value. The **name** attribute SHOULD NOT be used exclusively for identifying elements within a HAL representation, it is intended only as a 'secondary key' to a given **rel** value.
 
 Note: the following attributes have corresponding [target attributes][9]' as defined in [Web Linking [RFC 5988]][7]
 
-*   #### @hreflang
+*   __hreflang__
   
     OPTIONAL
 
     For indicating what the language of the result of dereferencing the link should be.
 
-*   @title
+*   __title__
    
     OPTIONAL
 
@@ -225,21 +225,21 @@ Note: the following attributes have corresponding [target attributes][9]' as def
 
 The following are attribute definitions applicable only to HAL's **Link** element.
 
-*   @href
+*   __href__
 
     REQUIRED
 
-    This attribute MAY contain a URI template. Whether or not this is the case SHOULD be indicated to clients by the @rel value.
+    This attribute MAY contain a URI template. Whether or not this is the case SHOULD be indicated to clients by the __rel__ value.
 
 ### Resource Attributes
 
 The following are attribute definitions applicable only to HAL's **Resource** element.
 
-*    @href
+*    __href__
     
      REQUIRED
     
-     Content embedded within a **Resource** element MAY be a full, partial, summary, or incorrect representation of the content available at the target URI. Applications which use HAL MAY clarify the integrity of specific embedded content via the description of the relevant **@rel** value.
+     Content embedded within a **Resource** element MAY be a full, partial, summary, or incorrect representation of the content available at the target URI. Applications which use HAL MAY clarify the integrity of specific embedded content via the description of the relevant **rel** value.
 
 ## Constraints
 
@@ -284,21 +284,13 @@ For JSON, a 'curie' link can be used like so:
 { ... '_links' : { 'curie': { 'href' : 'http://example.com/rels/{relation}', 'name': 'ex' }, ... }, ... }
 ```
 
-## Extending HAL
-
-HAL representations SHOULD NOT make extended or modified useage of HAL's reserved elements. If you find that you have a requirement for clarifications, fixes, or additional features, please consider joining the [discussion group][2], where you can highlight issues and propose changes to this specification.
-
-In a situation in which your proposed feature or change is not accepted then you could either violate this advice and 'silently extend' HAL for your application or, alternatively, create a separate media type extending HAL. A separate media type is the approach taken for an extension that allows form-like, templated writes: it was decided that it would not be included in HAL because it added too much complexity. As a result, it will be estbalished as a separate media type SHAL (application/shal+xml), currently under development.
-
 ## Acknowledgements
 
-Thanks to Darrel Miller for adopting HAL early-on and providing quality feedback.
-
-Thanks to mike amundsen for his great suggestions and occasional zen-slaps.
+Thanks to Darrel Miller and Mike Amundsen for their invaluable feedback.
 
 ## Notes/todo
 
-Media type parameter for 'edge processability' and/or version?
+Transclusion ala esi for JSON variant? XML can reuse ESI?
 
  [1]: mailto:mike%40stateless.co
  [2]: http://groups.google.com/group/hal-discuss
