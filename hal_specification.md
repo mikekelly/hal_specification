@@ -281,7 +281,7 @@ For XML, the [CURIE syntax][10] MAY be used for brevity.
 For JSON, a 'curie' link can be used like so:
 
 ```javascript
-{ ... '_links' : { 'curie': { 'href' : 'http://example.com/rels/{relation}', 'title': 'ex' }, ... }, ... }
+{ ... '_links' : { 'curie': { 'href' : 'http://example.com/rels/{relation}', 'name': 'ex' }, ... }, ... }
 ```
 
 ## Extending HAL
