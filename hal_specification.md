@@ -110,7 +110,7 @@ Here is how you could represent a collection of orders with the JSON variant of 
 Here is the same example using the XML variant of HAL:
 
 ```xml
-<resource href="/orders">
+<resource href="/orders" xmlns="http://stateless.co/ns">
   <link rel="next" href="/orders?page=2" />
   <link rel="search" href="/orders?id={order_id}" />
   <resource rel="order" href="/orders/123">
@@ -244,6 +244,7 @@ The following are attribute definitions applicable only to HAL's **Resource** el
 ## Constraints
 
 The root of a HAL representation MUST be a **Resource** with an href that corresponds to the effective request URI of the resource being represented.
+The elements within the document must all use the 'http://stateless.co/ns' XML namespace. 
 
 ## HAL in JSON (application/hal+json)
 
