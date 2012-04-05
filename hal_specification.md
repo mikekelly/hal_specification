@@ -15,11 +15,11 @@ If you have any questions or feedback about HAL, you can message the [HAL-discus
 
 ## General Description
 
-HAL is a lean, simple, domain-agnostic hypermedia type for providing links in REST APIs. It can be serialized as both JSON and XML.
+HAL is a lean, simple, domain-agnostic hypermedia type for providing links in REST APIs. It has both JSON and XML variants.
 
 Essentially, HAL provides a set of conventions for expressing hyperlinks to, and embeddedness of, related resources - the rest of a HAL representation is just plain old JSON or XML. 
 
-HAL is a bit like HTML for machines, in that it is domain-agnostic and is capable of driving any hypertext application. The difference is that HTML is intended for presenting a graphical hypertext interface to a 'human actor', whereas HAL is intended for presenting a machine hypertext interface (aka. REST API) to be consumed by 'automated actors'. 
+HAL is a bit like HTML for machines, in that it is domain-agnostic and is capable of driving any hypertext application. The difference is that HTML is intended for presenting a graphical hypertext interface to a 'human actor', whereas HAL is intended for presenting a machine hypertext interface (aka. REST API) to 'automated actors'. 
 
 This document contains a formalised specification of HAL. For a friendlier, more pracitcal introduction to HAL you can read this article: [JSON Linking with HAL][3] 
 
@@ -172,13 +172,17 @@ An implementation is not compliant if it fails to satisfy one or more of the MUS
 
     The XML based variant of HAL
 
-## JSON variant
+## Components
 
-### Resource
+HAL provides hypertext capabilities via two elements:
 
-### Link
+1.  Resources
+    
+    For expressing the embedded nature of a given part of the representation.
 
-## XML variant
+2.  Links
+
+    For expressing 'outbound' hyperlinks to other, related resources.
 
 ### Shared Attributes
 
