@@ -1,3 +1,6 @@
+---
+layout: default
+---
 # HAL - Hypertext Application Language
 
 ## A lean hypermedia type for RESTful APIs
@@ -38,7 +41,7 @@ HAL encourages the use of link relations to:
 
 Here is how you could represent a collection of orders with the JSON variant of HAL:
 
-```javascript
+{% highlight javascript %}
 {
   "_links": {
     "self": { "href": "/orders" },
@@ -105,11 +108,11 @@ Here is how you could represent a collection of orders with the JSON variant of 
     ]
   }
 }
-```
+{% endhighlight %}
 
 Here is the same example using the XML variant of HAL:
 
-```xml
+{% highlight xml %}
 <resource href="/orders">
   <link rel="next" href="/orders?page=2" />
   <link rel="search" href="/orders?id={order_id}" />
@@ -152,7 +155,7 @@ Here is the same example using the XML variant of HAL:
     <placed>2011-01-16</placed>
   </resource>
 </resource>
-```
+{% endhighlight %}
 
 ## Compliance
 
@@ -187,7 +190,7 @@ The **Resource** and **Link** elements share the following attributes:
     
     For indicating the target URI.
     
-    **href** corresponds with the '[Target IRI][6]' as defined in [Web Linking [RFC 5988]][7]
+    **href** corresponds with the '[Target IRI][6]' as defined in [Web Linking (RFC 5988)][7]
 
 *   __rel__
     
@@ -197,7 +200,7 @@ The **Resource** and **Link** elements share the following attributes:
     
     This attribute is not a requirement for the root element of a HAL representation, as it has an implicit default value of 'self'
     
-    **rel** corresponds with the '[relation parameter][8]' as defined in [Web Linking [RFC 5988]][7]
+    **rel** corresponds with the '[relation parameter][8]' as defined in [Web Linking (RFC 5988)][7]
     
     **rel** attribute SHOULD be used for identifying **Resource** and **Link** elements in a HAL representation.
 
@@ -207,7 +210,7 @@ The **Resource** and **Link** elements share the following attributes:
     
     For distinguishing between **Resource** and **Link** elements that share the same **rel** value. The **name** attribute SHOULD NOT be used exclusively for identifying elements within a HAL representation, it is intended only as a 'secondary key' to a given **rel** value.
 
-Note: the following attributes have corresponding [target attributes][9]' as defined in [Web Linking [RFC 5988]][7]
+Note: the following attributes have corresponding [target attributes][9]' as defined in [Web Linking (RFC 5988)][7]
 
 *   __hreflang__
   
@@ -253,22 +256,22 @@ Further details on the JSON variant of HAL:
 
 *   **Resources** are represented as objects
 *   **Resource** objects have two reserved properties: \_links and \_embedded
-*   The _links property contains **Link** objects against keys that match their relation
-*   The _embedded property contains embedded **Resource** objects against keys that match their relation
-*   **Resource** objects MUST have a self link (_link.self) which indicates the URI of the embedded resource
+*   The \_links property contains **Link** objects against keys that match their relation
+*   The \_embedded property contains embedded **Resource** objects against keys that match their relation
+*   **Resource** objects MUST have a self link (\_link.self) which indicates the URI of the embedded resource
 *   Relations with one corresponding **Resource**/**Link** have a single object value, relations with multiple corresponding HAL elements have an array of objects as their value.
 
 ## Minimum Valid Representation
 
 ### JSON
-```javascript
-{ "_links": { "self": { "href": "http://example.com/" } } }
-```
+{% highlight javascript %}
+{ "\_links": { "self": { "href": "http://example.com/" } } }
+{% endhighlight %}
 
 ### XML
-```xml
+{% highlight xml %}
 <resource href="http://example.com/" />
-```
+{% endhighlight %}
 
 ## Recommendations
 
@@ -280,9 +283,9 @@ For XML, the [CURIE syntax][10] MAY be used for brevity.
 
 For JSON, a 'curie' link can be used like so:
 
-```javascript
-{ ... '_links' : { 'curie': { 'href' : 'http://example.com/rels/{relation}', 'name': 'ex' }, ... }, ... }
-```
+{% highlight xml %}
+{ ... '\_links' : { 'curie': { 'href' : 'http://example.com/rels/{relation}', 'name': 'ex' }, ... }, ... }
+{% endhighlight %}
 
 ## Acknowledgements
 
@@ -296,7 +299,7 @@ Transclusion ala esi for JSON variant? XML can reuse ESI?
  [2]: http://groups.google.com/group/hal-discuss
  [3]: http://blog.stateless.co/post/13296666138/json-linking-with-hal
  [4]: http://stateless.co/info-model.png
- [5]: http://stateless.co#refs-2119
+ [5]: http://tools.ietf.org/html/rfc2119
  [6]: http://tools.ietf.org/html/rfc5988#section-5.1
  [7]: http://tools.ietf.org/html/rfc5988
  [8]: http://tools.ietf.org/html/rfc5988#section-5.3
