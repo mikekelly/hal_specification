@@ -265,7 +265,7 @@ Further details on the JSON variant of HAL:
 
 ### JSON
 {% highlight javascript %}
-{ "\_links": { "self": { "href": "http://example.com/" } } }
+{ "_links": { "self": { "href": "http://example.com/" } } }
 {% endhighlight %}
 
 ### XML
@@ -283,8 +283,8 @@ For XML, the [CURIE syntax][10] MAY be used for brevity.
 
 For JSON, a 'curie' link can be used like so:
 
-{% highlight xml %}
-{ ... '\_links' : { 'curie': { 'href' : 'http://example.com/rels/{relation}', 'name': 'ex' }, ... }, ... }
+{% highlight javascript %}
+{ ... '_links' : { 'curie': { 'href' : 'http://example.com/rels/{relation}', 'name': 'ex' }, ... }, ... }
 {% endhighlight %}
 
 ## Acknowledgements
