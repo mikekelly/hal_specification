@@ -2,7 +2,7 @@ html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-
 
 body{
 color:#444;
-font-family:Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+font-family: Helvetica, sans-serif;
 font-size:12px;
 line-height:1.5em;
 padding:1em;
@@ -100,6 +100,15 @@ body{font-size:16px;}
   @page :right { margin: 15mm 10mm 15mm 20mm; }
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3 { page-break-after: avoid; }
+}
+
+div.highlight {
+  background-color: #f8f8ff;
+  border: 1px solid #DDD;
+  padding: 15px;
+  font-size: 14px;
+  line-height: 16px;
+  font-family: 'Bitstream Vera Sans Mono', 'Courier', monospace;
 }
 
 /* pygmentize -S default -f html */
