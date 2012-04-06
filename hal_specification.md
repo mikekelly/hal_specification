@@ -165,6 +165,7 @@ Here is the same example using the XML variant of HAL:
 
 ## Code
 * [(PHP) Hal Library][12]
+* [(PHP) Nocarrier\Hal][15]
 * [(C#) Hal.Net][13]
 * [(C#) WCF Media Type Formatter][14]
 * [(Java) HalBuilder][11]
@@ -325,3 +326,4 @@ Transclusion ala esi for JSON variant? XML can reuse ESI?
  [12]: https://github.com/zircote/Hal
  [13]: http://hal.codeplex.com/
  [14]: https://bitbucket.org/smichelotti/hal-media-type
+ [15]: https://github.com/blongden/hal
