@@ -21,7 +21,7 @@ If you have any questions or feedback about HAL, you can message the [HAL-discus
 * [(Java) HalBuilder][7]
 
 
- [1]: hal_specification.md
+ [1]: https://github.com/mikekelly/hal_specification/blob/master/hal_specification.md
  [2]: http://blog.stateless.co/post/13296666138/json-linking-with-hal
  [3]: http://groups.google.com/group/hal-discuss
  [4]: https://github.com/zircote/Hal
