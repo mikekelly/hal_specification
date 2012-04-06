@@ -14,6 +14,10 @@ For a friendlier, more pracitcal introduction to HAL you can read this article: 
 
 If you have any questions or feedback about HAL, you can message the [HAL-discuss mailing list][3]. 
 
+## Contributing
+If you think some part of the spec needs changing, just fork this repo
+and raise a pull request with your changes.
+
 ## Code
 * [(PHP) Hal Library][4]
 * [(C#) Hal.Net][5]
