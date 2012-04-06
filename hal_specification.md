@@ -15,21 +15,27 @@ If you have any questions or feedback about HAL, you can message the [HAL-discus
 
 ## General Description
 
-HAL is a lean, simple, domain-agnostic hypermedia type for providing links in REST APIs. It has both JSON and XML variants.
+HAL is a simple way of linking in REST APIs with JSON or XML.
 
 Essentially, HAL provides a set of conventions for expressing hyperlinks to, and embeddedness of, related resources - the rest of a HAL representation is just plain old JSON or XML. 
 
-HAL is a bit like HTML for machines, in that it is domain-agnostic and is capable of driving any hypertext application. The difference is that HTML is intended for presenting a graphical hypertext interface to a 'human actor', whereas HAL is intended for presenting a machine hypertext interface (aka. REST API) to 'automated actors'. 
+HAL is a bit like HTML for machines, in that it is designed to drive many different types of application. The difference is that HTML is intended for presenting a graphical hypertext interface to a 'human actor', whereas HAL is intended for presenting a machine hypertext interface to 'automated actors'. 
 
 This document contains a formalised specification of HAL. For a friendlier, more pracitcal introduction to HAL you can read this article: [JSON Linking with HAL][3] 
 
-HAL has two main components: Resources and Links. Resources have their own state, links, and embedded resources (which are resources in their own right). Links primarily map link relations to URIs in a key/value fashion. Below is an image illustrating this information model: 
+HAL has two main components: Resources and Links.
+* Resources can have their own state, links, and other embedded resources.
+* Links have link relations (rels) that signal how the to interpret the target resource.
+
+Below is an image illustrating HAL's information model: 
 
 ![The HAL Information model][4]
 
-HAL is a media type with which applications are meant to be developed and exposed as sets of traversable link relations. 
+HAL is two media types (application/hal+json & application/hal+xml) with which applications are meant to be developed and exposed as sets of traversable link relations. 
 
-Instead of using linkless JSON/XML or developing a custom media type, you can use HAL and focus on designing the link relations which drive your application. 
+Instead of using linkless JSON/XML, or spending time developing a custom
+media type, you can just use HAL and focus on creating link relations to
+drive your application.
 
 HAL encourages the use of link relations to: 
 

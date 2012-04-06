@@ -2,7 +2,7 @@
 
 ## A lean hypermedia type for RESTful APIs
 
-HAL is a lean, simple, domain-agnostic hypermedia type for providing links in REST APIs. It has both JSON and XML variants.
+HAL is a simple way of linking in REST APIs with either JSON or XML.
 
 Essentially, HAL provides a set of conventions for expressing hyperlinks to, and embeddedness of, related resources - the rest of a HAL representation is just plain old JSON or XML. 
 
