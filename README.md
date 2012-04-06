@@ -1,0 +1,30 @@
+# HAL - Hypertext Application Language
+
+## A lean hypermedia type for RESTful APIs
+
+HAL is a lean, simple, domain-agnostic hypermedia type for providing links in REST APIs. It has both JSON and XML variants.
+
+Essentially, HAL provides a set of conventions for expressing hyperlinks to, and embeddedness of, related resources - the rest of a HAL representation is just plain old JSON or XML. 
+
+This repo contains a formalised specification of HAL (see [hal\_specification.md][1]).
+
+For a friendlier, more pracitcal introduction to HAL you can read this article: [JSON Linking with HAL][2].
+
+## Discussion Group
+
+If you have any questions or feedback about HAL, you can message the [HAL-discuss mailing list][3]. 
+
+## Code
+* [(PHP) Hal Library][4]
+* [(C#) Hal.Net][5]
+* [(C#) WCF Media Type Formatter][6]
+* [(Java) HalBuilder][7]
+
+
+ [1]: hal_specification.md
+ [2]: http://blog.stateless.co/post/13296666138/json-linking-with-hal
+ [3]: http://groups.google.com/group/hal-discuss
+ [4]: https://github.com/zircote/Hal
+ [5]: https://github.com/talios/halbuilder
+ [6]: http://hal.codeplex.com/
+ [7]: https://bitbucket.org/smichelotti/hal-media-type
