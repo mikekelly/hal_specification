@@ -157,6 +157,12 @@ Here is the same example using the XML variant of HAL:
 </resource>
 {% endhighlight %}
 
+## Code
+* [(PHP) Hal Library][12]
+* [(C#) Hal.Net][13]
+* [(C#) WCF Media Type Formatter][14]
+* [(Java) HalBuilder][11]
+
 ## Compliance
 
 An implementation is not compliant if it fails to satisfy one or more of the MUST or REQUIRED level requirements. An implementation that satisfies all the MUST or REQUIRED level and all the SHOULD level requirements is said to be "unconditionally compliant"; one that satisfies all the MUST level requirements but not all the SHOULD level requirements is said to be "conditionally compliant." 
@@ -309,3 +315,7 @@ Transclusion ala esi for JSON variant? XML can reuse ESI?
  [8]: http://tools.ietf.org/html/rfc5988#section-5.3
  [9]: http://tools.ietf.org/html/rfc5988#section-5.4
  [10]: http://www.w3.org/TR/curie/
+ [11]: https://github.com/talios/halbuilder
+ [12]: https://github.com/zircote/Hal
+ [13]: http://hal.codeplex.com/
+ [14]: https://bitbucket.org/smichelotti/hal-media-type
