@@ -1,10 +1,10 @@
 # HAL - Hypertext Application Language
 
-## A lean hypermedia type for RESTful APIs
+## A lean hypermedia type
 
-HAL is a simple way of linking in REST APIs with either JSON or XML.
+HAL is a simple way of linking with JSON or XML.
 
-Essentially, HAL provides a set of conventions for expressing hyperlinks to, and embeddedness of, related resources - the rest of a HAL representation is just plain old JSON or XML. 
+It provides a set of conventions for expressing hyperlinks to, and embeddedness of, related resources - the rest of a HAL document is just plain old JSON or XML. 
 
 This repo contains a formalised specification of HAL (see [hal\_specification.md][1]).
 

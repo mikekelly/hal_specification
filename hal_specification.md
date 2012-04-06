@@ -3,10 +3,10 @@ layout: default
 ---
 # HAL - Hypertext Application Language
 
-## A lean hypermedia type for RESTful APIs
+## A lean hypermedia type
 
 * __Author:__ Mike Kelly ([mike@stateless.co][1])
-* __Dates:__ 2011-06-13 (Created) 2012-04-02 (Updated)
+* __Dates:__ 2011-06-13 (Created) 2012-04-06 (Updated)
 * __Status:__ Draft
 
 ### Discussion Group
@@ -15,9 +15,9 @@ If you have any questions or feedback about HAL, you can message the [HAL-discus
 
 ## General Description
 
-HAL is a simple way of linking in REST APIs with JSON or XML.
+HAL is a simple way of linking with JSON or XML.
 
-Essentially, HAL provides a set of conventions for expressing hyperlinks to, and embeddedness of, related resources - the rest of a HAL representation is just plain old JSON or XML. 
+It provides a set of conventions for expressing hyperlinks to, and embeddedness of, related resources - the rest of a HAL document is just plain old JSON or XML. 
 
 HAL is a bit like HTML for machines, in that it is designed to drive many different types of application. The difference is that HTML is intended for presenting a graphical hypertext interface to a 'human actor', whereas HAL is intended for presenting a machine hypertext interface to 'automated actors'. 
 
@@ -25,7 +25,7 @@ This document contains a formalised specification of HAL. For a friendlier, more
 
 HAL has two main components: Resources and Links.
 * Resources can have their own state, links, and other embedded resources.
-* Links have link relations (rels) that signal how the to interpret the target resource.
+* Links have a link relation (rel) that signals how to interpret the target resource.
 
 Below is an image illustrating HAL's information model: 
 
