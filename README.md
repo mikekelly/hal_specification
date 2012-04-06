@@ -19,10 +19,13 @@ If you think some part of the spec needs changing, just fork this repo
 and raise a pull request with your changes.
 
 ## Code
+* [(Ruby) JSON::HAL][9]
 * [(PHP) Hal Library][4]
+* [(PHP) Nocarrier\Hal][8]
 * [(C#) Hal.Net][5]
 * [(C#) WCF Media Type Formatter][6]
 * [(Java) HalBuilder][7]
+
 
 
  [1]: https://github.com/mikekelly/hal_specification/blob/master/hal_specification.md
@@ -32,3 +35,5 @@ and raise a pull request with your changes.
  [5]: https://github.com/talios/halbuilder
  [6]: http://hal.codeplex.com/
  [7]: https://bitbucket.org/smichelotti/hal-media-type
+ [8]: https://github.com/blongden/hal
+ [9]: https://github.com/apotonick/roar/blob/master/lib/roar/representer/json/hal.rb

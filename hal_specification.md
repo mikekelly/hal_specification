@@ -164,6 +164,7 @@ Here is the same example using the XML variant of HAL:
 {% endhighlight %}
 
 ## Code
+* [(Ruby) JSON::HAL][16]
 * [(PHP) Hal Library][12]
 * [(PHP) Nocarrier\Hal][15]
 * [(C#) Hal.Net][13]
@@ -327,3 +328,4 @@ Transclusion ala esi for JSON variant? XML can reuse ESI?
  [13]: http://hal.codeplex.com/
  [14]: https://bitbucket.org/smichelotti/hal-media-type
  [15]: https://github.com/blongden/hal
+ [16]: https://github.com/apotonick/roar/blob/master/lib/roar/representer/json/hal.rb
