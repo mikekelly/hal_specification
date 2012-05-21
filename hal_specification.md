@@ -255,7 +255,7 @@ The following are attribute definitions applicable only to HAL's **Link** elemen
 
 *   __templated__
 
-    REQUIRED
+    OPTIONAL
 
     This attribute SHOULD be present with a boolean value of true when the href of the link contains a [URI Template (RFC6570)][18].
 
