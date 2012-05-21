@@ -6,7 +6,7 @@ layout: default
 ## A lean hypermedia type
 
 * __Author:__ Mike Kelly ([mike@stateless.co][1])
-* __Dates:__ 2011-06-13 (Created) 2012-04-06 (Updated)
+* __Dates:__ 2011-06-13 (Created) 2012-06-21 (Updated)
 * __Status:__ Draft
 
 ### Discussion Group
@@ -165,6 +165,7 @@ Here is the same example using the XML variant of HAL:
 
 ## Code
 * [(Ruby) JSON::HAL][16]
+* [(Ruby) Frenetic][17]
 * [(PHP) Hal Library][12]
 * [(PHP) Nocarrier\Hal][15]
 * [(C#) Hal.Net][13]
@@ -250,7 +251,13 @@ The following are attribute definitions applicable only to HAL's **Link** elemen
 
     REQUIRED
 
-    This attribute MAY contain a URI template. Whether or not this is the case SHOULD be indicated to clients by the __rel__ value.
+    This attribute MAY contain a [URI Template (RFC6570)][18] and in which case, SHOULD be complemented by an additional __templated__ attribtue on the link with a boolean value true.
+
+*   __templated__
+
+    REQUIRED
+
+    This attribute SHOULD be present with a boolean value of true when the href of the link contains a [URI Template (RFC6570)][18].
 
 ### Resource Attributes
 
@@ -264,7 +271,10 @@ The following are attribute definitions applicable only to HAL's **Resource** el
 
 ## Constraints
 
-The root of a HAL representation MUST be a **Resource** with an href that corresponds to the effective request URI of the resource being represented.
+The root of a HAL representation MUST be a **Resource** that links itself to the URI of the resource being represented.
+
+* hal+xml; this is exposed via the href attribute of the resource.
+* hal+json; this is exposed via a 'self' link.
 
 ## HAL in JSON (application/hal+json)
 
@@ -329,3 +339,5 @@ Transclusion ala esi for JSON variant? XML can reuse ESI?
  [14]: https://bitbucket.org/smichelotti/hal-media-type
  [15]: https://github.com/blongden/hal
  [16]: https://github.com/apotonick/roar/blob/master/lib/roar/representer/json/hal.rb
+ [17]: https://github.com/dlindahl/frenetic
+ [18]: http://tools.ietf.org/html/rfc6570
