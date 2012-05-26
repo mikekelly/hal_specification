@@ -276,6 +276,48 @@ The root of a HAL representation MUST be a **Resource** that links itself to the
 * hal+xml; this is exposed via the href attribute of the resource.
 * hal+json; this is exposed via a 'self' link.
 
+## Fragments
+
+Certain scenarios require the ability to reference fragments of a HAL document.  The following syntax can be used as a fragment identifier for XML based HAL.
+
+    index      = 1*DIGIT  ; 0 based index in list of matching links 
+    name       = 1*(pchar)
+	resourceId = relation | relation[name / index]
+    xpath      = <any valid xpath expression>
+    fragment   = *(resourceId / "/")[ "/" xpath ]
+
+Considering the following sample,
+
+{% highlight xml %}
+<resource href="/orders/123/basket">
+    <resource rel="item" name="widget">
+        <sku>ABC123</sku>
+        <quantity>2</quantity>
+        <price>9.50</price>
+    </resource>
+    <resource rel="item" name="whatsit">
+        <sku>GFZ111</sku>
+        <quantity>1</quantity>
+        <price>11.00</price>
+    </resource>
+    <total>30.00</total>
+    <currency>USD</currency>
+    <status>shipped</status>
+    <placed>2011-01-16</placed>
+    <resource rel="user">
+        <name>John Done</name>
+    </resource>
+</resource>
+{% endhighlight %}
+
+The following are valid fragments:
+
+     total
+     user
+	 user/name
+     item[1]
+	 item["widget"]/price
+
 ## HAL in JSON (application/hal+json)
 
 Note: click the following for a [more accessible explanation of HAL in JSON][3]

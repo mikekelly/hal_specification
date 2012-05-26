@@ -33,7 +33,7 @@ and raise a pull request with your changes.
  [3]: http://groups.google.com/group/hal-discuss
  [4]: https://github.com/zircote/Hal
  [5]: https://github.com/talios/halbuilder
- [6]: http://hal.codeplex.com/
+ [6]: https://github.com/tavis-software/hal
  [7]: https://bitbucket.org/smichelotti/hal-media-type
  [8]: https://github.com/blongden/hal
  [9]: https://github.com/apotonick/roar/blob/master/lib/roar/representer/json/hal.rb
