@@ -6,8 +6,27 @@ layout: default
 ## A lean hypermedia type
 
 * __Author:__ Mike Kelly ([mike@stateless.co][1])
-* __Dates:__ 2011-06-13 (Created) 2012-06-21 (Updated)
+* __Dates:__ 2011-06-13 (Created) 2012-06-09 (Updated)
 * __Status:__ Draft
+
+## RFC
+
+This document is the original (less formal) specification for HAL.
+application/hal+json has been published as an internet draft:
+[draft-kelly-json-hal-00][21].
+
+## Libraries For Working With HAL
+* [(Ruby) ROAR][16]
+* [(Ruby) Frenetic][17]
+* [(Ruby) Hyperclient][19]
+* [(JS) Backbone.HAL][20]
+* [(PHP) Hal Library][12]
+* [(PHP) Nocarrier\Hal][15]
+* [(C#) Tavis.Hal][23]
+* [(C#) Hal.Net][13]
+* [(C#) WCF Media Type Formatter][14]
+* [(Java) HalBuilder][11]
+* [(Eiffel) HAL][22]
 
 ### Discussion Group
 
@@ -31,6 +50,69 @@ Below is an image illustrating HAL's information model:
 
 ![The HAL Information model][4]
 
+## Examples
+
+Here is how you could represent a collection of orders with the JSON variant of HAL:
+
+{% highlight javascript %}
+{
+   "_links": {
+     "self": { "href": "/orders" },
+     "next": { "href": "/orders?page=2" },
+     "find": { "href": "/orders{?id}", "templated": true }
+   },
+   "_embedded": {
+     "orders": [{
+         "_links": {
+           "self": { "href": "/orders/123" },
+           "basket": { "href": "/baskets/98712" },
+           "customer": { "href": "/customers/7809" }
+         },
+         "total": 30.00,
+         "currency": "USD",
+         "status": "shipped",
+       },{
+         "_links": {
+           "self": { "href": "/orders/124" },
+           "basket": { "href": "/baskets/97213" },
+           "customer": { "href": "/customers/12369" }
+         },
+         "total": 20.00,
+         "currency": "USD",
+         "status": "processing"
+     }]
+   },
+   currentlyProcessing: 14,
+   shippedToday: 20
+ }
+}
+{% endhighlight %}
+
+Here is the same example using the XML variant of HAL:
+
+{% highlight xml %}
+<resource href="/orders">
+  <link rel="next" href="/orders?page=2" />
+  <link rel="find" href="/orders{?id}" templated="true" />
+  <resource rel="order" href="/orders/123">
+    <link rel="customer" href="/customers/7809" />
+    <link rel="basket" href="/baskets/98712">
+    <total>30.00</total>
+    <currency>USD</currency>
+    <status>shipped</status>
+  </resource>
+  <resource rel="order" href="/orders/124">
+    <link rel="customer" href="/customer/12369" />
+    <link rel="basket" href="/baskets/97213">
+    <total>20.00</total>
+    <currency>USD</currency>
+    <status>processing</status>
+  </resource>
+</resource>
+{% endhighlight %}
+
+## How to use HAL
+
 HAL is two media types (application/hal+json & application/hal+xml) with which applications are meant to be developed and exposed as sets of traversable link relations. 
 
 Instead of using linkless JSON/XML, or spending time developing a custom
@@ -42,135 +124,6 @@ HAL encourages the use of link relations to:
 *   Identify links and embedded resources within the representation
 *   Infer the expected structure and meaning of target resources
 *   Signalling what requests and representations can be submitted to target resources
-
-## Examples
-
-Here is how you could represent a collection of orders with the JSON variant of HAL:
-
-{% highlight javascript %}
-{
-  "_links": {
-    "self": { "href": "/orders" },
-    "next": { "href": "/orders?page=2" },
-    "search": { "href": "/orders?id={order_id}" }
-  },
-  "_embedded": {
-    "order": [
-      {
-        "_links": {
-          "self": { "href": "/orders/123" },
-          "customer": { "href": "/customer/bob", "title": "Bob Jones <bob@jones.com>" }
-        },
-        "total": 30.00,
-        "currency": "USD",
-        "status": "shipped",
-        "placed": "2011-01-16",
-        "_embedded": {
-          "basket": {
-            "_links": {
-              "self": { "href": "/orders/123/basket" }
-            },
-            "items": [
-              {
-                "sku": "ABC123",
-                "quantity": 2,
-                "price": 9.50
-              },{
-                "sku": "GFZ111",
-                "quantity": 1,
-                "price": 11
-              }
-            ]
-          }
-        }
-      },{
-        "_links": {
-          "self": { "href": "/orders/124" },
-          "customer": { "href": "/customer/jen", "title": "Jen Harris <jen@internet.com>" }
-        },
-        "total": 20.00,
-        "currency": "USD",
-        "status": "processing",
-        "placed": "2011-01-16",
-        "_embedded": {
-          "basket": {
-            "_links": {
-              "self": { "href": "/orders/124/basket" }
-            },
-            "items": [
-              {
-                "sku": "KLM222",
-                "quantity": 1,
-                "price": 9.00
-              },{
-                "sku": "HHI50",
-                "quantity": 1,
-                "price": 11.00
-              }
-            ]
-          }
-        }
-      }
-    ]
-  }
-}
-{% endhighlight %}
-
-Here is the same example using the XML variant of HAL:
-
-{% highlight xml %}
-<resource href="/orders">
-  <link rel="next" href="/orders?page=2" />
-  <link rel="search" href="/orders?id={order_id}" />
-  <resource rel="order" href="/orders/123">
-    <link rel="customer" href="/customer/bob" title="Bob Jones <bob@jones.com>" />
-    <resource rel="basket" href="/orders/123/basket">
-      <item>
-        <sku>ABC123</sku>
-        <quantity>2</quantity>
-        <price>9.50</price>
-      </item>
-      <item>
-        <sku>GFZ111</sku>
-        <quantity>1</quantity>
-        <price>11.00</price>
-      </item>
-    </resource>
-    <total>30.00</total>
-    <currency>USD</currency>
-    <status>shipped</status>
-    <placed>2011-01-16</placed>
-  </resource>
-  <resource rel="order" href="/orders/124">
-    <link rel="customer" href="/customer/jen" title="Jen Harris <jen@internet.com>" />
-    <resource rel="basket" href="/orders/124/basket">
-      <item>
-        <sku>KLM222</sku>
-        <quantity>1</quantity>
-        <price>9.00</price>
-      </item>
-      <item>
-        <sku>HHI50</sku>
-        <quantity>1</quantity>
-        <price>11.00</price>
-      </item>
-    </resource>
-    <total>20.00</total>
-    <currency>USD</currency>
-    <status>processing</status>
-    <placed>2011-01-16</placed>
-  </resource>
-</resource>
-{% endhighlight %}
-
-## Code
-* [(Ruby) JSON::HAL][16]
-* [(Ruby) Frenetic][17]
-* [(PHP) Hal Library][12]
-* [(PHP) Nocarrier\Hal][15]
-* [(C#) Hal.Net][13]
-* [(C#) WCF Media Type Formatter][14]
-* [(Java) HalBuilder][11]
 
 ## Compliance
 
@@ -341,3 +294,8 @@ Transclusion ala esi for JSON variant? XML can reuse ESI?
  [16]: https://github.com/apotonick/roar/blob/master/lib/roar/representer/json/hal.rb
  [17]: https://github.com/dlindahl/frenetic
  [18]: http://tools.ietf.org/html/rfc6570
+ [19]: http://codegram.github.com/hyperclient/
+ [20]: https://github.com/mikekelly/backbone.hal
+ [21]: http://tools.ietf.org/html/draft-kelly-json-hal-00
+ [22]: https://github.com/jvelilla/HAL
+ [23]: https://github.com/tavis-software/hal
