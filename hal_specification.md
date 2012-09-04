@@ -13,7 +13,7 @@ layout: default
 
 This document is the original (less formal) specification for HAL.
 application/hal+json has been published as an internet draft:
-[draft-kelly-json-hal-00][21].
+[draft-kelly-json-hal-03][21].
 
 ## Libraries For Working With HAL
 * [(Ruby) ROAR][16]
@@ -296,6 +296,6 @@ Transclusion ala esi for JSON variant? XML can reuse ESI?
  [18]: http://tools.ietf.org/html/rfc6570
  [19]: http://codegram.github.com/hyperclient/
  [20]: https://github.com/mikekelly/backbone.hal
- [21]: http://tools.ietf.org/html/draft-kelly-json-hal-00
+ [21]: http://tools.ietf.org/html/draft-kelly-json-hal-03
  [22]: https://github.com/jvelilla/HAL
  [23]: https://github.com/tavis-software/hal
