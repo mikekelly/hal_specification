@@ -6,14 +6,13 @@ layout: default
 ## A lean hypermedia type
 
 * __Author:__ Mike Kelly ([mike@stateless.co][1])
-* __Dates:__ 2011-06-13 (Created) 2012-06-09 (Updated)
+* __Dates:__ 2011-06-13 (Created) 2012-09-17 (Updated)
 * __Status:__ Draft
 
 ## RFC
 
-This document is the original (less formal) specification for HAL.
-application/hal+json has been published as an internet draft:
-[draft-kelly-json-hal-00][21].
+The JSON variant of HAL (application/hal+json) has now been published as an internet draft:
+[draft-kelly-json-hal][21].
 
 ## Libraries For Working With HAL
 * [(Ruby) ROAR][16]
@@ -23,7 +22,7 @@ application/hal+json has been published as an internet draft:
 * [(PHP) Hal Library][12]
 * [(PHP) Nocarrier\Hal][15]
 * [(C#) Tavis.Hal][23]
-* [(C#) Hal.Net][13]
+* [(C#) HALClient][13]
 * [(C#) WCF Media Type Formatter][14]
 * [(Java) HalBuilder][11]
 * [(Eiffel) HAL][22]
@@ -288,7 +287,7 @@ Transclusion ala esi for JSON variant? XML can reuse ESI?
  [10]: http://www.w3.org/TR/curie/
  [11]: https://github.com/talios/halbuilder
  [12]: https://github.com/zircote/Hal
- [13]: http://hal.codeplex.com/
+ [13]: https://github.com/ecomfi/halclient
  [14]: https://bitbucket.org/smichelotti/hal-media-type
  [15]: https://github.com/blongden/hal
  [16]: https://github.com/apotonick/roar/blob/master/lib/roar/representer/json/hal.rb
@@ -296,6 +295,6 @@ Transclusion ala esi for JSON variant? XML can reuse ESI?
  [18]: http://tools.ietf.org/html/rfc6570
  [19]: http://codegram.github.com/hyperclient/
  [20]: https://github.com/mikekelly/backbone.hal
- [21]: http://tools.ietf.org/html/draft-kelly-json-hal-00
+ [21]: http://tools.ietf.org/html/draft-kelly-json-hal
  [22]: https://github.com/jvelilla/HAL
  [23]: https://github.com/tavis-software/hal
