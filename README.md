@@ -14,7 +14,7 @@ article: [JSON Linking with HAL][2].
 
 The JSON variant of HAL (application/hal+json) has now been published as
 an internet draft:
-[draft-kelly-json-hal][21].
+[draft-kelly-json-hal][5].
 
 ## Discussion Group
 
@@ -32,3 +32,4 @@ There is a list of libraries for working with HAL[4].
  [2]: http://blog.stateless.co/post/13296666138/json-linking-with-hal
  [3]: http://groups.google.com/group/hal-discuss
  [4]: https://github.com/mikekelly/hal_specification/blob/master/hal_specification.md#libraries-for-working-with-hal
+ [5]: http://tools.ietf.org/html/draft-kelly-json-hal
