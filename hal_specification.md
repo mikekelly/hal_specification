@@ -28,8 +28,12 @@ The JSON variant of HAL (application/hal+json) has now been published as an inte
 * [(Scala) halbuilder-scala][24]
 * [(Eiffel) HAL][22]
 * [Test Representations][25]
+* [HAL Browser][26]
 
-### Discussion Group
+### Example Hypermedia API using HAL
+* [HAL Talk][27]
+
+## Discussion Group
 
 If you have any questions or feedback about HAL, you can message the
 [HAL-discuss mailing list][2]. 
@@ -324,3 +328,5 @@ Thanks to Darrel Miller and Mike Amundsen for their invaluable feedback.
  [23]: https://github.com/tavis-software/hal
  [24]: https://github.com/HalBuilder/halbuilder-scala
  [25]: https://github.com/HalBuilder/halbuilder-test-resources/tree/develop/src/main/resources
+ [26]: https://github.com/mikekelly/hal-browser
+ [27]: http://haltalk.herokuapp.com/
