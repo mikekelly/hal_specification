@@ -25,8 +25,8 @@ If you have any questions or feedback about HAL, you can message the
 If you think some part of the spec needs changing, just fork this repo
 and raise a pull request with your changes.
 
-## Code
-There is a list of libraries for working with HAL[4].
+## Code/Libraries
+hal_specification.md contains [a list of libraries for working with HAL][4].
 
  [1]: https://github.com/mikekelly/hal_specification/blob/master/hal_specification.md
  [2]: http://blog.stateless.co/post/13296666138/json-linking-with-hal
