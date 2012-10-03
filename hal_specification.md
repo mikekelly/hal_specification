@@ -6,7 +6,7 @@ layout: default
 ## A lean hypermedia type
 
 * __Author:__ Mike Kelly ([mike@stateless.co][1])
-* __Dates:__ 2011-06-13 (Created) 2012-09-17 (Updated)
+* __Dates:__ 2011-06-13 (Created) 2012-10-03 (Updated)
 * __Status:__ Draft
 
 ## RFC
@@ -24,28 +24,40 @@ The JSON variant of HAL (application/hal+json) has now been published as an inte
 * [(C#) Tavis.Hal][23]
 * [(C#) HALClient][13]
 * [(C#) WCF Media Type Formatter][14]
-* [(Java) HalBuilder][11]
+* [(Java) halbuilder-java][11]
+* [(Scala) halbuilder-scala][24]
 * [(Eiffel) HAL][22]
+* [Test Representations][25]
 
 ### Discussion Group
 
-If you have any questions or feedback about HAL, you can message the [HAL-discuss mailing list][2]. 
+If you have any questions or feedback about HAL, you can message the
+[HAL-discuss mailing list][2]. 
 
 ## General Description
 
 HAL is a simple way of linking with JSON or XML.
 
-It provides a set of conventions for expressing hyperlinks to, and embeddedness of, related resources - the rest of a HAL document is just plain old JSON or XML. 
+It provides a set of conventions for expressing hyperlinks to, and
+embeddedness of, related resources - the rest of a HAL document is just
+plain old JSON or XML. 
 
-HAL is a bit like HTML for machines, in that it is designed to drive many different types of application. The difference is that HTML is intended for presenting a graphical hypertext interface to a 'human actor', whereas HAL is intended for presenting a machine hypertext interface to 'automated actors'. 
+HAL is a bit like HTML for machines, in that it is generic and designed
+to drive many different types of application. The difference is that
+HTML has features for presenting a graphical hypermedia interface to a
+'human actor', whereas HAL is intended for presenting a machine
+hypertext interface to 'automated actors'.
 
-This document contains a formalised specification of HAL. For a friendlier, more pracitcal introduction to HAL you can read this article: [JSON Linking with HAL][3] 
+This document is a relatively formal specification of HAL. For a
+friendlier, more pracitcal introduction to HAL you can read this
+article: [JSON Linking with HAL][3] 
 
 HAL has two main components: Resources and Links.
 * Resources can have their own state, links, and other embedded resources.
 * Links have a link relation (rel) that signals how to interpret the target resource.
 
-Below is an image illustrating HAL's information model: 
+Below is an image that roughly illustrates how a HAL representation is
+structured: 
 
 ![The HAL Information model][4]
 
@@ -55,35 +67,34 @@ Here is how you could represent a collection of orders with the JSON variant of 
 
 {% highlight javascript %}
 {
-   "_links": {
-     "self": { "href": "/orders" },
-     "next": { "href": "/orders?page=2" },
-     "find": { "href": "/orders{?id}", "templated": true }
-   },
-   "_embedded": {
-     "orders": [{
-         "_links": {
-           "self": { "href": "/orders/123" },
-           "basket": { "href": "/baskets/98712" },
-           "customer": { "href": "/customers/7809" }
-         },
-         "total": 30.00,
-         "currency": "USD",
-         "status": "shipped",
-       },{
-         "_links": {
-           "self": { "href": "/orders/124" },
-           "basket": { "href": "/baskets/97213" },
-           "customer": { "href": "/customers/12369" }
-         },
-         "total": 20.00,
-         "currency": "USD",
-         "status": "processing"
-     }]
-   },
-   currentlyProcessing: 14,
-   shippedToday: 20
- }
+  "_links": {
+   "self": { "href": "/orders" },
+   "next": { "href": "/orders?page=2" },
+   "find": { "href": "/orders{?id}", "templated": true }
+  },
+  currentlyProcessing: 14,
+  shippedToday: 20,
+  "_embedded": {
+   "orders": [{
+       "_links": {
+         "self": { "href": "/orders/123" },
+         "basket": { "href": "/baskets/98712" },
+         "customer": { "href": "/customers/7809" }
+       },
+       "total": 30.00,
+       "currency": "USD",
+       "status": "shipped",
+     },{
+       "_links": {
+         "self": { "href": "/orders/124" },
+         "basket": { "href": "/baskets/97213" },
+         "customer": { "href": "/customers/12369" }
+       },
+       "total": 20.00,
+       "currency": "USD",
+       "status": "processing"
+    }]
+  }
 }
 {% endhighlight %}
 
@@ -93,6 +104,8 @@ Here is the same example using the XML variant of HAL:
 <resource href="/orders">
   <link rel="next" href="/orders?page=2" />
   <link rel="find" href="/orders{?id}" templated="true" />
+  <currentlyProcessing>14<currentlyProcessing>
+  <shippedToday>20</shippedToday>
   <resource rel="order" href="/orders/123">
     <link rel="customer" href="/customers/7809" />
     <link rel="basket" href="/baskets/98712">
@@ -112,11 +125,12 @@ Here is the same example using the XML variant of HAL:
 
 ## How to use HAL
 
-HAL is two media types (application/hal+json & application/hal+xml) with which applications are meant to be developed and exposed as sets of traversable link relations. 
+HAL is two media types (application/hal+json & application/hal+xml) with
+which applications are exposed as sets of link relations. 
 
 Instead of using linkless JSON/XML, or spending time developing a custom
-media type, you can just use HAL and focus on creating link relations to
-drive your application.
+media type, you can just use HAL and focus on defining the link
+relations to drive your application.
 
 HAL encourages the use of link relations to: 
 
@@ -126,9 +140,16 @@ HAL encourages the use of link relations to:
 
 ## Compliance
 
-An implementation is not compliant if it fails to satisfy one or more of the MUST or REQUIRED level requirements. An implementation that satisfies all the MUST or REQUIRED level and all the SHOULD level requirements is said to be "unconditionally compliant"; one that satisfies all the MUST level requirements but not all the SHOULD level requirements is said to be "conditionally compliant." 
+An implementation is not compliant if it fails to satisfy one or more of
+the MUST or REQUIRED level requirements. An implementation that
+satisfies all the MUST or REQUIRED level and all the SHOULD level
+requirements is said to be "unconditionally compliant"; one that
+satisfies all the MUST level requirements but not all the SHOULD level
+requirements is said to be "conditionally compliant." 
 
-> The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][5]. 
+> The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+> "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+> document are to be interpreted as described in [RFC 2119][5]. 
 
 ## Media Type Identifiers
 *   __application/hal+json__
@@ -257,7 +278,9 @@ Further details on the JSON variant of HAL:
 
 ### Using URIs for Link relation values
 
-Link relation values used in HAL representations SHOULD be URIs which, when dereferenced, provide relevant details. This helps to improve the discoverability of your application.
+Link relation values used in HAL representations SHOULD be URIs which,
+when dereferenced, provide relevant details. This helps to improve the
+discoverability of your application.
 
 For XML, the [CURIE syntax][10] MAY be used for brevity.
 
@@ -273,7 +296,8 @@ Thanks to Darrel Miller and Mike Amundsen for their invaluable feedback.
 
 ## Notes/todo
 
-Transclusion ala esi for JSON variant? XML can reuse ESI?
+* Add deprecates property to link objects
+* Transclusion ala esi for JSON variant? XML can reuse ESI?
 
  [1]: mailto:mike%40stateless.co
  [2]: http://groups.google.com/group/hal-discuss
@@ -285,7 +309,7 @@ Transclusion ala esi for JSON variant? XML can reuse ESI?
  [8]: http://tools.ietf.org/html/rfc5988#section-5.3
  [9]: http://tools.ietf.org/html/rfc5988#section-5.4
  [10]: http://www.w3.org/TR/curie/
- [11]: https://github.com/talios/halbuilder
+ [11]: https://github.com/HalBuilder/halbuilder-java
  [12]: https://github.com/zircote/Hal
  [13]: https://github.com/ecomfi/halclient
  [14]: https://bitbucket.org/smichelotti/hal-media-type
@@ -298,3 +322,5 @@ Transclusion ala esi for JSON variant? XML can reuse ESI?
  [21]: http://tools.ietf.org/html/draft-kelly-json-hal
  [22]: https://github.com/jvelilla/HAL
  [23]: https://github.com/tavis-software/hal
+ [24]: https://github.com/HalBuilder/halbuilder-scala
+ [25]: https://github.com/HalBuilder/halbuilder-test-resources/tree/develop/src/main/resources
