@@ -6,7 +6,7 @@ layout: default
 ## A lean hypermedia type
 
 * __Author:__ Mike Kelly ([mike@stateless.co][1])
-* __Dates:__ 2011-06-13 (Created) 2012-10-03 (Updated)
+* __Dates:__ 2011-06-13 (Created) 2012-10-22 (Updated)
 * __Status:__ Draft
 
 ## RFC
@@ -15,17 +15,19 @@ The JSON variant of HAL (application/hal+json) has now been published as an inte
 [draft-kelly-json-hal][21].
 
 ## Libraries For Working With HAL
+* [JSON Schema][28]
 * [(Ruby) ROAR][16]
 * [(Ruby) Frenetic][17]
 * [(Ruby) Hyperclient][19]
+* [(Ruby+CLI) halidator][29]
 * [(JS) Backbone.HAL][20]
 * [(PHP) Hal Library][12]
 * [(PHP) Nocarrier\Hal][15]
 * [(C#) Tavis.Hal][23]
 * [(C#) HALClient][13]
 * [(C#) WCF Media Type Formatter][14]
-* [(Java) halbuilder-java][11]
-* [(Scala) halbuilder-scala][24]
+* [(Java) halbuilder-java][30]
+* [(Scala) halbuilder-scala][30]
 * [(Eiffel) HAL][22]
 * [Test Representations][25]
 * [HAL Browser][26]
@@ -330,3 +332,6 @@ Thanks to Darrel Miller and Mike Amundsen for their invaluable feedback.
  [25]: https://github.com/HalBuilder/halbuilder-test-resources/tree/develop/src/main/resources
  [26]: https://github.com/mikekelly/hal-browser
  [27]: http://haltalk.herokuapp.com/
+ [28]: https://github.com/DaveJS/dave.schema.json
+ [29]: https://github.com/deathbob/halidator
+ [30]: http://gotohal.net/
