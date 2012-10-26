@@ -9,6 +9,11 @@ layout: default
 * __Dates:__ 2011-06-13 (Created) 2012-10-22 (Updated)
 * __Status:__ Draft
 
+## Summary
+
+HAL is a format you can use in your API that gives you a simple way of
+linking. It has two variants, one in JSON and one in XML.
+
 ## RFC
 
 The JSON variant of HAL (application/hal+json) has now been published as an internet draft:
@@ -37,16 +42,18 @@ The JSON variant of HAL (application/hal+json) has now been published as an inte
 
 ## Discussion Group
 
-If you have any questions or feedback about HAL, you can message the
+If you have any questions or feedback, you can message the
 [HAL-discuss mailing list][2]. 
 
 ## General Description
 
-HAL is a simple way of linking with JSON or XML.
-
-It provides a set of conventions for expressing hyperlinks to, and
+HAL provides a set of conventions for expressing hyperlinks to, and
 embeddedness of, related resources - the rest of a HAL document is just
 plain old JSON or XML. 
+
+Instead of using linkless JSON/XML, or spending time developing a custom
+media type, you can just use HAL and focus on defining and documenting
+the link relations that direct your clients through your API.
 
 HAL is a bit like HTML for machines, in that it is generic and designed
 to drive many different types of application. The difference is that
@@ -54,9 +61,10 @@ HTML has features for presenting a graphical hypermedia interface to a
 'human actor', whereas HAL is intended for presenting a machine
 hypertext interface to 'automated actors'.
 
-This document is a relatively formal specification of HAL. For a
-friendlier, more pracitcal introduction to HAL you can read this
+For a pracitcal introduction to hal+json you can read this
 article: [JSON Linking with HAL][3] 
+
+## The HAL Model
 
 HAL has two main components: Resources and Links.
 * Resources can have their own state, links, and other embedded resources.
@@ -74,9 +82,13 @@ Here is how you could represent a collection of orders with the JSON variant of 
 {% highlight javascript %}
 {
   "_links": {
-   "self": { "href": "/orders" },
-   "next": { "href": "/orders?page=2" },
-   "find": { "href": "/orders{?id}", "templated": true }
+    "self": { "href": "/orders" },
+    "next": { "href": "/orders?page=2" },
+    "find": { "href": "/orders{?id}", "templated": true },
+    "admin": [
+      { "href": "/admins/2", "title": "Fred" },
+      { "href": "/admins/5", "title": "Kate" }
+    ]
   },
   currentlyProcessing: 14,
   shippedToday: 20,
@@ -110,6 +122,8 @@ Here is the same example using the XML variant of HAL:
 <resource href="/orders">
   <link rel="next" href="/orders?page=2" />
   <link rel="find" href="/orders{?id}" templated="true" />
+  <link rel="admin" href="/admins/2" title="Fred" />
+  <link rel="admin" href="/admins/5" title="Kate" />
   <currentlyProcessing>14<currentlyProcessing>
   <shippedToday>20</shippedToday>
   <resource rel="order" href="/orders/123">
@@ -133,10 +147,6 @@ Here is the same example using the XML variant of HAL:
 
 HAL is two media types (application/hal+json & application/hal+xml) with
 which applications are exposed as sets of link relations. 
-
-Instead of using linkless JSON/XML, or spending time developing a custom
-media type, you can just use HAL and focus on defining the link
-relations to drive your application.
 
 HAL encourages the use of link relations to: 
 
