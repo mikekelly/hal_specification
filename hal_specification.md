@@ -94,7 +94,7 @@ Here is how you could represent a collection of orders with the JSON variant of 
   currentlyProcessing: 14,
   shippedToday: 20,
   "_embedded": {
-   "orders": [{
+   "order": [{
        "_links": {
          "self": { "href": "/orders/123" },
          "basket": { "href": "/baskets/98712" },
