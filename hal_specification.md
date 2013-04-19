@@ -35,6 +35,7 @@ The JSON variant of HAL (application/hal+json) has now been published as an inte
 * [(Scala) halbuilder-scala][30]
 * [(Objective-C) HyperBek][31]
 * [(Eiffel) HAL][22]
+* [(Clojure) halresource][32]
 * [Test Representations][25]
 * [HAL Browser][26]
 
@@ -347,3 +348,4 @@ Thanks to Darrel Miller and Mike Amundsen for their invaluable feedback.
  [29]: https://github.com/deathbob/halidator
  [30]: http://gotohal.net/
  [31]: https://bitbucket.org/dcutting/hyperbek
+ [32]: https://github.com/cndreisbach/halresource
