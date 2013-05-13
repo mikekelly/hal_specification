@@ -81,7 +81,8 @@ structured:
 
 Here is how you could represent a collection of orders with the JSON variant of HAL:
 
-{% highlight javascript %}
+
+```javascript
 {
   "_links": {
     "self": { "href": "/orders" },
@@ -116,11 +117,12 @@ Here is how you could represent a collection of orders with the JSON variant of 
     }]
   }
 }
-{% endhighlight %}
+```
+
 
 Here is the same example using the XML variant of HAL:
 
-{% highlight xml %}
+```xml
 <resource href="/orders">
   <link rel="next" href="/orders?page=2" />
   <link rel="find" href="/orders{?id}" templated="true" />
@@ -143,7 +145,7 @@ Here is the same example using the XML variant of HAL:
     <status>processing</status>
   </resource>
 </resource>
-{% endhighlight %}
+```
 
 ## How to use HAL
 
@@ -283,14 +285,14 @@ Further details on the JSON variant of HAL:
 ## Minimum Valid Representation
 
 ### JSON
-{% highlight javascript %}
+```javascript
 { "_links": { "self": { "href": "http://example.com/" } } }
-{% endhighlight %}
+```
 
 ### XML
-{% highlight xml %}
+```xml
 <resource href="http://example.com/" />
-{% endhighlight %}
+```
 
 ## Recommendations
 
@@ -304,9 +306,9 @@ For XML, the [CURIE syntax][10] MAY be used for brevity.
 
 For JSON, a 'curie' link can be used like so:
 
-{% highlight javascript %}
+```javascript
 { ... '_links' : { 'curie': { 'href' : 'http://example.com/rels/{relation}', 'name': 'ex' }, ... }, ... }
-{% endhighlight %}
+```
 
 ## Acknowledgements
 
