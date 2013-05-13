@@ -12,7 +12,7 @@ plugins:     ./_plugins
 future:      true
 lsi:         false
 pygments:    true
-markdown:    maruku
+markdown:    redcarpet
 permalink:   date
 
 maruku:
