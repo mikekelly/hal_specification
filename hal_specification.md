@@ -341,7 +341,7 @@ Thanks to Darrel Miller and Mike Amundsen for their invaluable feedback.
  [13]: https://github.com/ecomfi/halclient
  [14]: https://bitbucket.org/smichelotti/hal-media-type
  [15]: https://github.com/blongden/hal
- [16]: https://github.com/apotonick/roar/blob/master/lib/roar/representer/json/hal.rb
+ [16]: http://nicksda.apotomo.de/2012/04/roar-0-10-with-json-hal-support-and-representable-1-1-6-released/
  [17]: https://github.com/dlindahl/frenetic
  [18]: http://tools.ietf.org/html/rfc6570
  [19]: http://codegram.github.com/hyperclient/
