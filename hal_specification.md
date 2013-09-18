@@ -6,7 +6,7 @@ layout: default
 
 * __Author:__   [Mike Kelly][1] <[mike@stateless.co](mailto:mike@stateless.co)>
 * __Created:__  2011-06-13
-* __Updated:__  2013-09-17 (Updated)
+* __Updated:__  2013-09-18 (Updated)
 
 ## Summary
 HAL is a simple format that gives a consistent and easy way to
