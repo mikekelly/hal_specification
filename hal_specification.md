@@ -4,9 +4,9 @@ layout: default
 # HAL - Hypertext Application Language
 ## A lean hypermedia type
 
-* __Author:__   [Mike Kelly][1]
+* __Author:__   [Mike Kelly][1] <[mike@stateless.co](mailto:mike@stateless.co)>
 * __Created:__  2011-06-13
-* __Updated:__  2013-09-18 (Updated)
+* __Updated:__  2013-09-17 (Updated)
 
 ## Summary
 HAL is a simple format that gives a consistent and easy way to
@@ -23,20 +23,21 @@ JSON.
 
 ## About The Author
 Mike Kelly is a software engineer from the UK. He runs an [API
-consultancy][35] helping companies design and build beautiful, resilient
-APIs that developers love.
+consultancy][1] helping companies design and build beautiful APIs that
+developers love.
 
 ## Quick links
-* [A demo API using HAL called HAL Talk][27]
-* [A list of libraries for working with HAL][33]
-* [A list of hypermedia APIs using HAL][34]
+* [A demo API using HAL called HAL Talk][12]
+* [A list of libraries for working with HAL (Obj-C, Ruby, JS, PHP, C#,
+  etc.)][14]
+* [A list of public hypermedia APIs using HAL][15]
 * [Discussion group (questions, feedback, etc)][2]
 
 ## General Description
 HAL provides a set of conventions for expressing hyperlinks in either
 JSON or XML.
 
-_The rest of a HAL document is just plain old JSON or XML._
+**The rest of a HAL document is just plain old JSON or XML.**
 
 Instead of using ad-hoc structures, or spending valuable time designing
 your own format; you can adopt HAL's conventions and focus on building
@@ -49,7 +50,7 @@ through a web application to achieve their goals, whereas HAL is
 intended for helping 'automated actors' move through a web API to
 achieve their goals.
 
-Having said that, _HAL is actually very human-friendly too_. Its
+Having said that, **HAL is actually very human-friendly too**. Its
 conventions make the documentation for an API discoverable from the API
 messages themselves.  This makes it possible for developers to jump
 straight into a HAL-based API and explore its capabilities, without the
@@ -194,7 +195,6 @@ contain the relevant media type name.
 ## The structure of a HAL document
 
 ### Minimum valid document
-
 A HAL document must at least contain an empty resource.
 
 ##### hal+json
@@ -204,19 +204,12 @@ An empty JSON object:
 {}
 ```
 
-##### hal+xml
-An empty `resource` element:
-
-```xml
-<resource />
-```
-
 ### Resources
-
 In most cases, resources should have a self URI
 
 ##### hal+json
 Represened via a 'self' link:
+
 ```javascript
 {
     "_links": {
@@ -225,14 +218,7 @@ Represened via a 'self' link:
 }
 ```
 
-##### hal+xml
-Represented via a `@href` property on a `resource` element.
-```xml
-<resource href="/example_resource" />
-```
-
 ### Links
-
 Links must be contained directly within a resource:
 
 ##### hal+json
@@ -247,19 +233,9 @@ that must be a direct property of a resource object:
 }
 ```
 
-##### hal+xml
-Links are represented as `link` elements that must be a direct
-descendant of a `resource` element:
-
-```xml
-<resource>
-  <link rel="next" href="/page=2" />
-</resource>
-```
-
 #### Link Relations
 Links have a relation (aka. 'rel'). Link rels are the main way of
-distinguishing between a resource's links. Think of it like a key.
+distinguishing between a resource's links. It's basically just a key.
 
 ##### hal+json
 Link relations are used as the keys within the `_links` hash:
@@ -272,32 +248,22 @@ Link relations are used as the keys within the `_links` hash:
 }
 ```
 
-##### hal+xml
-Link relations are contained in `link` elements' `@rel` attribute.
-
-```xml
-<resource>
-  <link rel="next" href="/page=2" />
-</resource>
-```
-
 #### API Discoverability
 Link rels should be URLs which reveal documentation about the
-given link. This makes your application "discoverable", meaning it's
-easy for someone to jump into your API and find the relevant slice of
-documenation for each of the links they are presented with.
-
-URLs are generally quite long and a bit nasty for use as keys. To get
-around this, HAL provides "CURIEs" which are basically named tokens that
-you can define in the document and use to express link relation URIs in
-a friendlier, more compact fashion i.e.  `ex:widget` instead of
+given link, making them "discoverable".  URLs are generally quite long
+and a bit nasty for use as keys. To get around this, HAL provides
+"CURIEs" which are basically named tokens that you can define in the
+document and use to express link relation URIs in a friendlier, more
+compact fashion i.e.  `ex:widget` instead of
 `http://example.com/rels/widget`. The details are available in the
-[section on CURIEs][36]
+section on CURIEs a bit further down.
 
 ### Representing Multiple Links With The Same Relation
 A resource may have multiple links that share the same link relation.
 
 ##### hal+json
+For link relations that may have multiple links, we use an array of
+links.
 
 ```javascript
 {
@@ -311,27 +277,10 @@ A resource may have multiple links that share the same link relation.
 }
 ```
 
-##### hal+xml
-```xml
-<resource>
-</resource>
-```
-
-Single links (if doubt, go with multiple)
-
-##### hal+json
-```javascript
-{
-    "_links": {
-    }
-}
-```
-
-##### hal+xml
-```xml
-<resource>
-</resource>
-```
+**Note:** If you're unsure whether the link should be singular, assume it
+will be multiple. If you pick singular and find you need to change it,
+you will need to create a new link relation or face breaking existing
+clients.
 
 ### CURIEs
 
@@ -346,134 +295,28 @@ HAL gives you a reserved link relation 'curies' which you can
 }
 ```
 
-##### hal+xml
-```xml
-<resource>
-  <link rel="next" href="/page=2" />
-</resource>
-```
-
-
-
-*   __rel__
-    
-    REQUIRED
-    
-    For identifying how the target URI relates to the 'Subject **Resource**'. The Subject **Resource** is the closest parent **Resource** element.
-    
-    This attribute is not a requirement for the root element of a HAL representation, as it has an implicit default value of 'self'
-    
-    **rel** corresponds with the '[relation parameter][8]' as defined in [Web Linking (RFC 5988)][7]
-    
-    **rel** attribute SHOULD be used for identifying **Resource** and **Link** elements in a HAL representation.
-
-*   __name__
-    
-    OPTIONAL
-    
-    For distinguishing between **Resource** and **Link** elements that share the same **rel** value. The **name** attribute SHOULD NOT be used exclusively for identifying elements within a HAL representation, it is intended only as a 'secondary key' to a given **rel** value.
-
-Note: the following attributes have corresponding [target attributes][9]' as defined in [Web Linking (RFC 5988)][7]
-
-*   __hreflang__
-  
-    OPTIONAL
-
-    For indicating what the language of the result of dereferencing the link should be.
-
-*   __title__
-   
-    OPTIONAL
-
-    For labeling the destination of a link with a human-readable identifier.
-
-### Link Attributes
-
-The following are attribute definitions applicable only to HAL's **Link** element.
-
-*   __href__
-
-    REQUIRED
-
-    This attribute MAY contain a [URI Template (RFC6570)][18] and in which case, SHOULD be complemented by an additional __templated__ attribtue on the link with a boolean value true.
-
-*   __templated__
-
-    OPTIONAL
-
-    This attribute SHOULD be present with a boolean value of true when the href of the link contains a [URI Template (RFC6570)][18].
-
-### Resource Attributes
-
-The following are attribute definitions applicable only to HAL's **Resource** element.
-
-*    __href__
-    
-     REQUIRED
-    
-     Content embedded within a **Resource** element MAY be a full, partial, summary, or incorrect representation of the content available at the target URI. Applications which use HAL MAY clarify the integrity of specific embedded content via the description of the relevant **rel** value.
-
-## Constraints
-
-The root of a HAL representation MUST be a **Resource** that links itself to the URI of the resource being represented.
-
-* hal+xml; this is exposed via the href attribute of the resource.
-* hal+json; this is exposed via a 'self' link.
-
-## HAL in JSON (application/hal+json)
-
-Note: click the following for a [more accessible explanation of HAL in JSON][3]
-
-Further details on the JSON variant of HAL:
-
-*   **Resources** are represented as objects
-*   **Resource** objects have two reserved properties: \_links and \_embedded
-*   The \_links property contains **Link** objects against keys that match their relation
-*   The \_embedded property contains embedded **Resource** objects against keys that match their relation
-*   **Resource** objects MUST have a self link (\_link.self) which indicates the URI of the embedded resource
-*   Relations with one corresponding **Resource**/**Link** have a single object value, relations with multiple corresponding HAL elements have an array of objects as their value.
-
-## Minimum Valid Representation
-
-### JSON
-```javascript
-{ }
-```
-
-### XML
-```xml
-<resource />
-```
-
-## Recommendations
-
-### Using URIs for Link relation values
-
-Link relation values used in HAL representations SHOULD be URIs which,
-when dereferenced, provide relevant details. This helps to improve the
-discoverability of your application.
-
-For XML, the [CURIE syntax][10] MAY be used for brevity.
-
-For JSON, a 'curies' link can be used like so:
-
-```javascript
-{ ... '_links' : { 'curies': [{ 'href' : 'http://example.com/rels/{relation}', 'name': 'ex' }], ... }, ... }
-```
+## To be continued...
+This relatively informal specification of HAL is incomplete and still in
+progress. For now, if you would like to have a full understanding please
+read the [formal specification][13].
 
 ## RFC
-
-The JSON variant of HAL (application/hal+json) has now been published as an internet draft:
-[draft-kelly-json-hal][21].
+The JSON variant of HAL (application/hal+json) has now been published as
+an internet draft: [draft-kelly-json-hal][13].
 
 ## Acknowledgements
 
-Thanks to Darrel Miller and Mike Amundsen for their invaluable feedback.
+* Darrel Miller
+* Mike Amundsen
+* Mark Derricutt
+* Herman Radtke
+* Will Hartung
+* Steve Klablik
+* everyone on hal-discuss
+
+Thanks for the help :)
 
 ## Notes/todo
-
-* Add deprecates property to link objects
-* Transclusion ala esi for JSON variant? XML can reuse ESI?
 
  [1]: http://stateless.co/
  [2]: http://groups.google.com/group/hal-discuss
@@ -485,29 +328,8 @@ Thanks to Darrel Miller and Mike Amundsen for their invaluable feedback.
  [8]: http://tools.ietf.org/html/rfc5988#section-5.3
  [9]: http://tools.ietf.org/html/rfc5988#section-5.4
  [10]: http://www.w3.org/TR/curie/
- [11]: https://github.com/HalBuilder/halbuilder-java
- [12]: https://github.com/zircote/Hal
- [13]: https://github.com/ecomfi/halclient
- [14]: https://bitbucket.org/smichelotti/hal-media-type
- [15]: https://github.com/blongden/hal
- [16]: http://nicksda.apotomo.de/2012/04/roar-0-10-with-json-hal-support-and-representable-1-1-6-released/
- [17]: https://github.com/dlindahl/frenetic
- [18]: http://tools.ietf.org/html/rfc6570
- [19]: http://codegram.github.com/hyperclient/
- [20]: https://github.com/mikekelly/backbone.hal
- [21]: http://tools.ietf.org/html/draft-kelly-json-hal
- [22]: https://github.com/jvelilla/HAL
- [23]: https://github.com/tavis-software/hal
- [24]: https://github.com/HalBuilder/halbuilder-scala
- [25]: https://github.com/HalBuilder/halbuilder-test-resources/tree/develop/src/main/resources
- [26]: https://github.com/mikekelly/hal-browser
- [27]: http://haltalk.herokuapp.com/
- [28]: https://github.com/DaveJS/dave.schema.json
- [29]: https://github.com/deathbob/halidator
- [30]: http://gotohal.net/
- [31]: https://bitbucket.org/dcutting/hyperbek
- [32]: https://github.com/cndreisbach/halresource
- [33]: https://github.com/wharris/dougrain
- [34]:
- [35]:
- [36]: 
+ [11]: http://tools.ietf.org/html/rfc6570
+ [12]: http://haltalk.herokuapp.com/
+ [13]: http://tools.ietf.org/html/draft-kelly-json-hal
+ [14]: https://github.com/mikekelly/hal_specification/wiki/Libraries
+ [15]: https://github.com/mikekelly/hal_specification/wiki/APIs
