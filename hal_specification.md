@@ -2,87 +2,73 @@
 layout: default
 ---
 # HAL - Hypertext Application Language
-
 ## A lean hypermedia type
 
-* __Author:__ Mike Kelly ([mike@stateless.co][1])
-* __Dates:__ 2011-06-13 (Created) 2012-10-22 (Updated)
-* __Status:__ Draft
+* __Author:__   [Mike Kelly][1]
+* __Created:__  2011-06-13
+* __Updated:__  2013-09-18 (Updated)
 
 ## Summary
+HAL is a simple format that gives a consistent and easy way to
+hyperlink between resources in your API.
 
-HAL is a format you can use in your API that gives you a simple way of
-linking. It has two variants, one in JSON and one in XML.
+Adopting HAL will make your API explorable, and its documentation easily
+disocverable from within the API itself. In short, it will make your API
+easier to work with and therefore more attractive to client developers.
 
-## RFC
+APIs that adopt HAL can be easily served and consumed using open source
+libraries available for most major programming languages. It's also
+simple enough that you can just deal with it as you would any other
+JSON.
 
-The JSON variant of HAL (application/hal+json) has now been published as an internet draft:
-[draft-kelly-json-hal][21].
+## About The Author
+Mike Kelly is a software engineer from the UK. He runs an [API
+consultancy][35] helping companies design and build beautiful, resilient
+APIs that developers love.
 
-## Libraries For Working With HAL
-* [JSON Schema][28]
-* [(Ruby) ROAR][16]
-* [(Ruby) Frenetic][17]
-* [(Ruby) Hyperclient][19]
-* [(Ruby+CLI) halidator][29]
-* [(JS) Backbone.HAL][20]
-* [(PHP) Hal Library][12]
-* [(PHP) Nocarrier\Hal][15]
-* [(C#) Tavis.Hal][23]
-* [(C#) HALClient][13]
-* [(C#) WCF Media Type Formatter][14]
-* [(Java) halbuilder-java][30]
-* [(Scala) halbuilder-scala][30]
-* [(Objective-C) HyperBek][31]
-* [(Eiffel) HAL][22]
-* [(Clojure) halresource][32]
-* [(Python) Dougrain][33]
-* [Test Representations][25]
-* [HAL Browser][26]
-
-### Example Hypermedia API using HAL
-* [HAL Talk][27]
-
-## Discussion Group
-
-If you have any questions or feedback, you can message the
-[HAL-discuss mailing list][2]. 
+## Quick links
+* [A demo API using HAL called HAL Talk][27]
+* [A list of libraries for working with HAL][33]
+* [A list of hypermedia APIs using HAL][34]
+* [Discussion group (questions, feedback, etc)][2]
 
 ## General Description
+HAL provides a set of conventions for expressing hyperlinks in either
+JSON or XML.
 
-HAL provides a set of conventions for expressing hyperlinks to, and
-embeddedness of, related resources - the rest of a HAL document is just
-plain old JSON or XML. 
+_The rest of a HAL document is just plain old JSON or XML._
 
-Instead of using linkless JSON/XML, or spending time developing a custom
-media type, you can just use HAL and focus on defining and documenting
-the link relations that direct your clients through your API.
+Instead of using ad-hoc structures, or spending valuable time designing
+your own format; you can adopt HAL's conventions and focus on building
+and documenting the data and transitions that make up your API.
 
-HAL is a bit like HTML for machines, in that it is generic and designed
-to drive many different types of application. The difference is that
-HTML has features for presenting a graphical hypermedia interface to a
-'human actor', whereas HAL is intended for presenting a machine
-hypertext interface to 'automated actors'.
+HAL is a little bit like HTML for machines, in that it is generic and
+designed to drive many different types of application via hyperlinks.
+The difference is that HTML has features for helping 'human actors' move
+through a web application to achieve their goals, whereas HAL is
+intended for helping 'automated actors' move through a web API to
+achieve their goals.
 
-For a pracitcal introduction to hal+json you can read this
-article: [JSON Linking with HAL][3] 
-
-## The HAL Model
-
-HAL has two main components: Resources and Links.
-* Resources can have their own state, links, and other embedded resources.
-* Links have a link relation (rel) that signals how to interpret the target resource.
-
-Below is an image that roughly illustrates how a HAL representation is
-structured: 
-
-![The HAL Information model][4]
+Having said that, _HAL is actually very human-friendly too_. Its
+conventions make the documentation for an API discoverable from the API
+messages themselves.  This makes it possible for developers to jump
+straight into a HAL-based API and explore its capabilities, without the
+cognitive overhead of having to map some out-of-band documentation onto
+their journey.
 
 ## Examples
 
-Here is how you could represent a collection of orders with the JSON variant of HAL:
+Here is how you might represent a collection of orders with hal+json.
+Things to look for:
 
+* The URI of the main resource being represented ('/orders')
+* The 'next' link pointing to the next page of orders
+* A templated link called 'find' for searching orders by id
+* Two properties of the orders resource; 'currentlyProcessing' and
+  'shippedToday'
+* Embedded order resources with their own links and properties
 
+### application/hal+json
 ```javascript
 {
     "_links": {
@@ -127,8 +113,7 @@ Here is how you could represent a collection of orders with the JSON variant of 
 ```
 
 
-Here is the same example using the XML variant of HAL:
-
+### application/hal+xml
 ```xml
 <resource href="/orders">
   <link rel="next" href="/orders?page=2" />
@@ -153,11 +138,45 @@ Here is the same example using the XML variant of HAL:
   </resource>
 </resource>
 ```
+## The HAL Model
 
-## How to use HAL
+The HAL conventions revolve around representing two simple concepts: _Resources_ and _Links_.
 
-HAL is two media types (application/hal+json & application/hal+xml) with
-which applications are exposed as sets of link relations. 
+### Resources
+Resources have:
+
+* Links (to URIs)
+* Embedded Resources (i.e. other resources contained within them)
+* State (your bog standard JSON or XML data)
+
+### Links
+Links have:
+
+* A target (a URI)
+* A relation aka. 'rel' (the name of the link)
+* A few other optional properties to help with deprecation, content
+  negotiation, etc.
+
+Below is an image that roughly illustrates how a HAL representation is
+structured: 
+
+![The HAL Information model][4]
+
+## How HAL is used in APIs
+HAL is designed for building APIs in which clients navigate around the
+resources by following links.
+
+Links are identfied by link realtions. Link realtions are the lifeblood
+of a hypermedia API: they are how you tell client developers about
+what resources are available and how they can be interacted with, and
+they are how the code they write will select which link to traverse.
+
+Link relations are not just an identifying string in HAL, though. They
+are actually URLs, which developers can follow in order to read the
+documentation for a given link. This is what is known as
+"discoverability". The idea is that a developer can enter into your API,
+read through documentation for the available links, and then
+follow-their-nose through the API.
 
 HAL encourages the use of link relations to: 
 
@@ -165,51 +184,176 @@ HAL encourages the use of link relations to:
 *   Infer the expected structure and meaning of target resources
 *   Signalling what requests and representations can be submitted to target resources
 
-## Compliance
+## How to serve HAL
+HAL has a media type for both the JSON and XML variants, whos names are
+`application/hal+json` and `application/hal+xml` respectively.
 
-An implementation is not compliant if it fails to satisfy one or more of
-the MUST or REQUIRED level requirements. An implementation that
-satisfies all the MUST or REQUIRED level and all the SHOULD level
-requirements is said to be "unconditionally compliant"; one that
-satisfies all the MUST level requirements but not all the SHOULD level
-requirements is said to be "conditionally compliant." 
+When serving HAL over HTTP, the `Content-Type` of the response should
+contain the relevant media type name.
 
-> The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-> "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-> document are to be interpreted as described in [RFC 2119][5]. 
+## The structure of a HAL document
 
-## Media Type Identifiers
-*   __application/hal+json__
+### Minimum valid document
 
-    The JSON based variant of HAL
+A HAL document must at least contain an empty resource.
 
-*   __application/hal+xml__
+##### hal+json
+An empty JSON object:
 
-    The XML based variant of HAL
+```javascript
+{}
+```
 
-## Components
+##### hal+xml
+An empty `resource` element:
 
-HAL provides hypertext capabilities via two elements:
+```xml
+<resource />
+```
 
-1.  Resources
-    
-    For expressing the embedded nature of a given part of the representation.
+### Resources
 
-2.  Links
+In most cases, resources should have a self URI
 
-    For expressing 'outbound' hyperlinks to other, related resources.
+##### hal+json
+Represened via a 'self' link:
+```javascript
+{
+    "_links": {
+        "self": { "href": "/example_resource" }
+    }
+}
+```
 
-### Shared Attributes
+##### hal+xml
+Represented via a `@href` property on a `resource` element.
+```xml
+<resource href="/example_resource" />
+```
 
-The **Resource** and **Link** elements share the following attributes:
+### Links
 
-*   __href__
-    
-    REQUIRED
-    
-    For indicating the target URI.
-    
-    **href** corresponds with the '[Target IRI][6]' as defined in [Web Linking (RFC 5988)][7]
+Links must be contained directly within a resource:
+
+##### hal+json
+Links are represented as JSON object contained within a `_links` hash
+that must be a direct property of a resource object:
+
+```javascript
+{
+    "_links": {
+        "next": { "href": "/page=2" }
+    }
+}
+```
+
+##### hal+xml
+Links are represented as `link` elements that must be a direct
+descendant of a `resource` element:
+
+```xml
+<resource>
+  <link rel="next" href="/page=2" />
+</resource>
+```
+
+#### Link Relations
+Links have a relation (aka. 'rel'). Link rels are the main way of
+distinguishing between a resource's links. Think of it like a key.
+
+##### hal+json
+Link relations are used as the keys within the `_links` hash:
+
+```javascript
+{
+    "_links": {
+        "next": { "href": "/page=2" }
+    }
+}
+```
+
+##### hal+xml
+Link relations are contained in `link` elements' `@rel` attribute.
+
+```xml
+<resource>
+  <link rel="next" href="/page=2" />
+</resource>
+```
+
+#### API Discoverability
+Link rels should be URLs which reveal documentation about the
+given link. This makes your application "discoverable", meaning it's
+easy for someone to jump into your API and find the relevant slice of
+documenation for each of the links they are presented with.
+
+URLs are generally quite long and a bit nasty for use as keys. To get
+around this, HAL provides "CURIEs" which are basically named tokens that
+you can define in the document and use to express link relation URIs in
+a friendlier, more compact fashion i.e.  `ex:widget` instead of
+`http://example.com/rels/widget`. The details are available in the
+[section on CURIEs][36]
+
+### Representing Multiple Links With The Same Relation
+A resource may have multiple links that share the same link relation.
+
+##### hal+json
+
+```javascript
+{
+    "_links": {
+      "items": [{
+          "href": "/first_item"
+      },{
+          "href": "/second_item"
+      }]
+    }
+}
+```
+
+##### hal+xml
+```xml
+<resource>
+</resource>
+```
+
+Single links (if doubt, go with multiple)
+
+##### hal+json
+```javascript
+{
+    "_links": {
+    }
+}
+```
+
+##### hal+xml
+```xml
+<resource>
+</resource>
+```
+
+### CURIEs
+
+##### hal+json
+HAL gives you a reserved link relation 'curies' which you can 
+
+```javascript
+{
+    "_links": {
+        "ex:widget": { "href": "/page=2" }
+    }
+}
+```
+
+##### hal+xml
+```xml
+<resource>
+  <link rel="next" href="/page=2" />
+</resource>
+```
+
+
 
 *   __rel__
     
@@ -293,12 +437,12 @@ Further details on the JSON variant of HAL:
 
 ### JSON
 ```javascript
-{ "_links": { "self": { "href": "http://example.com/" } } }
+{ }
 ```
 
 ### XML
 ```xml
-<resource href="http://example.com/" />
+<resource />
 ```
 
 ## Recommendations
@@ -311,11 +455,16 @@ discoverability of your application.
 
 For XML, the [CURIE syntax][10] MAY be used for brevity.
 
-For JSON, a 'curie' link can be used like so:
+For JSON, a 'curies' link can be used like so:
 
 ```javascript
-{ ... '_links' : { 'curie': { 'href' : 'http://example.com/rels/{relation}', 'name': 'ex' }, ... }, ... }
+{ ... '_links' : { 'curies': [{ 'href' : 'http://example.com/rels/{relation}', 'name': 'ex' }], ... }, ... }
 ```
+
+## RFC
+
+The JSON variant of HAL (application/hal+json) has now been published as an internet draft:
+[draft-kelly-json-hal][21].
 
 ## Acknowledgements
 
@@ -326,7 +475,7 @@ Thanks to Darrel Miller and Mike Amundsen for their invaluable feedback.
 * Add deprecates property to link objects
 * Transclusion ala esi for JSON variant? XML can reuse ESI?
 
- [1]: mailto:mike%40stateless.co
+ [1]: http://stateless.co/
  [2]: http://groups.google.com/group/hal-discuss
  [3]: http://blog.stateless.co/post/13296666138/json-linking-with-hal
  [4]: http://stateless.co/info-model.png
@@ -359,3 +508,6 @@ Thanks to Darrel Miller and Mike Amundsen for their invaluable feedback.
  [31]: https://bitbucket.org/dcutting/hyperbek
  [32]: https://github.com/cndreisbach/halresource
  [33]: https://github.com/wharris/dougrain
+ [34]:
+ [35]:
+ [36]: 
