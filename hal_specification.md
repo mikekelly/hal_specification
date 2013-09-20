@@ -176,7 +176,6 @@ contain the relevant media type name.
 ### Minimum valid document
 A HAL document must at least contain an empty resource.
 
-##### hal+json
 An empty JSON object:
 
 ```javascript
@@ -186,7 +185,6 @@ An empty JSON object:
 ### Resources
 In most cases, resources should have a self URI
 
-##### hal+json
 Represened via a 'self' link:
 
 ```javascript
@@ -200,7 +198,6 @@ Represened via a 'self' link:
 ### Links
 Links must be contained directly within a resource:
 
-##### hal+json
 Links are represented as JSON object contained within a `_links` hash
 that must be a direct property of a resource object:
 
@@ -216,7 +213,6 @@ that must be a direct property of a resource object:
 Links have a relation (aka. 'rel'). Link rels are the main way of
 distinguishing between a resource's links. It's basically just a key.
 
-##### hal+json
 Link relations are used as the keys within the `_links` hash:
 
 ```javascript
@@ -240,7 +236,6 @@ section on CURIEs a bit further down.
 ### Representing Multiple Links With The Same Relation
 A resource may have multiple links that share the same link relation.
 
-##### hal+json
 For link relations that may have multiple links, we use an array of
 links.
 
@@ -263,7 +258,6 @@ clients.
 
 ### CURIEs
 
-##### hal+json
 HAL gives you a reserved link relation 'curies' which you can 
 
 ```javascript
