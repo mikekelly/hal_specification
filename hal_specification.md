@@ -59,27 +59,32 @@ their journey.
 
 ## Examples
 
-Here is how you might represent a collection of orders with hal+json.
-Things to look for:
+The example below is how you might represent a collection of orders with
+hal+json. Things to look for:
 
-* The URI of the main resource being represented ('/orders')
+* The URI of the main resource being represented ('/orders') expressed
+  with a self link
 * The 'next' link pointing to the next page of orders
-* A templated link called 'find' for searching orders by id
-* Two properties of the orders resource; 'currentlyProcessing' and
+* A templated link called 'ea:find' for searching orders by id
+* The multiple 'ea:admin' link objects contained in an array
+* Two properties of the orders collection; 'currentlyProcessing' and
   'shippedToday'
 * Embedded order resources with their own links and properties
+* The compact URI (curie) named 'ea' for expanding the name of the
+  links to their documentation URL
 
 ### application/hal+json
 ```javascript
 {
     "_links": {
         "self": { "href": "/orders" },
+        "curies": [{ "name": "ea", "href": "http://example.com/docs/rels/{rel}", "templated": true }],
         "next": { "href": "/orders?page=2" },
-        "find": {
+        "ea:find": {
             "href": "/orders{?id}",
             "templated": true
         },
-        "admin": [{
+        "ea:admin": [{
             "href": "/admins/2",
             "title": "Fred"
         }, {
@@ -90,11 +95,11 @@ Things to look for:
     "currentlyProcessing": 14,
     "shippedToday": 20,
     "_embedded": {
-        "order": [{
+        "ea:order": [{
             "_links": {
                 "self": { "href": "/orders/123" },
-                "basket": { "href": "/baskets/98712" },
-                "customer": { "href": "/customers/7809" }
+                "ea:basket": { "href": "/baskets/98712" },
+                "ea:customer": { "href": "/customers/7809" }
             },
             "total": 30.00,
             "currency": "USD",
@@ -102,8 +107,8 @@ Things to look for:
         }, {
             "_links": {
                 "self": { "href": "/orders/124" },
-                "basket": { "href": "/baskets/97213" },
-                "customer": { "href": "/customers/12369" }
+                "ea:basket": { "href": "/baskets/97213" },
+                "ea:customer": { "href": "/customers/12369" }
             },
             "total": 20.00,
             "currency": "USD",
@@ -113,32 +118,6 @@ Things to look for:
 }
 ```
 
-
-### application/hal+xml
-```xml
-<resource href="/orders">
-  <link rel="next" href="/orders?page=2" />
-  <link rel="find" href="/orders{?id}" templated="true" />
-  <link rel="admin" href="/admins/2" title="Fred" />
-  <link rel="admin" href="/admins/5" title="Kate" />
-  <currentlyProcessing>14<currentlyProcessing>
-  <shippedToday>20</shippedToday>
-  <resource rel="order" href="/orders/123">
-    <link rel="customer" href="/customers/7809" />
-    <link rel="basket" href="/baskets/98712">
-    <total>30.00</total>
-    <currency>USD</currency>
-    <status>shipped</status>
-  </resource>
-  <resource rel="order" href="/orders/124">
-    <link rel="customer" href="/customer/12369" />
-    <link rel="basket" href="/baskets/97213">
-    <total>20.00</total>
-    <currency>USD</currency>
-    <status>processing</status>
-  </resource>
-</resource>
-```
 ## The HAL Model
 
 The HAL conventions revolve around representing two simple concepts: _Resources_ and _Links_.
