@@ -9,7 +9,7 @@ expressing hyperlinks to, and embeddedness of, related resources.
 
 The spec is here: [hal\_specification.md][1].
 
-For a friendlier, more pracitcal introduction to HAL you can read this
+For a friendlier, more practical introduction to HAL you can read this
 article: [JSON Linking with HAL][2].
 
 The JSON variant of HAL (application/hal+json) has now been published as
