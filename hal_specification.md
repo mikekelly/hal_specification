@@ -308,7 +308,7 @@ an internet draft: [draft-kelly-json-hal][13].
 * Mark Derricutt
 * Herman Radtke
 * Will Hartung
-* Steve Klablik
+* Steve Klabnik
 * everyone on hal-discuss
 
 Thanks for the help :)
