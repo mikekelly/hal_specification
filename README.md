@@ -19,7 +19,7 @@ an internet draft:
 ## Discussion Group
 
 If you have any questions or feedback about HAL, you can message the
-[HAL-discuss mailing list][3]. 
+[HAL-discuss mailing list][3].
 
 ## Contributing
 If you think some part of the spec needs changing, just fork this repo
@@ -31,5 +31,5 @@ hal_specification.md contains [a list of libraries for working with HAL][4].
  [1]: https://github.com/mikekelly/hal_specification/blob/master/hal_specification.md
  [2]: http://blog.stateless.co/post/13296666138/json-linking-with-hal
  [3]: http://groups.google.com/group/hal-discuss
- [4]: https://github.com/mikekelly/hal_specification/blob/master/hal_specification.md#libraries-for-working-with-hal
+ [4]: https://github.com/mikekelly/hal_specification/wiki/Libraries
  [5]: http://tools.ietf.org/html/draft-kelly-json-hal
