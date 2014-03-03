@@ -261,15 +261,36 @@ clients.
 
 ### CURIEs
 
-HAL gives you a reserved link relation 'curies' which you can
+"CURIE"s help providing links to resource documentation.
+
+HAL gives you a reserved link relation 'curies' which you can use to define shortcuts to documentation.
 
 ```javascript
-{
-    "_links": {
-        "ex:widget": { "href": "/page=2" }
+"_links": {
+  "curies": [
+    {
+      "name": "doc",
+      "href": "http://haltalk.herokuapp.com/docs/{rel}",
+      "templated": true
     }
+  ],
+
+  "doc:latest-posts": {
+    "href": "/posts/latest"
+  }
 }
 ```
+
+There can be multiple links in the 'curies' section. They come with a 'name' and a templated 'href' which must
+contain the `{rel}` placeholder.
+
+Links in turn can then prefix their 'rel' with a CURIE name. Associating the `latest-posts` link with the `doc`
+documentation CURIE results in a link 'rel' set to `doc:latest-posts`.
+
+To retrieve documentation about the `latest-posts` resource, the client will expand the associated CURIE link
+with the actual link's 'rel'. This would result in a URL `http://haltalk.herokuapp.com/rels/latest-posts` which
+is expected to return documentation about this resource.
+
 
 ## To be continued...
 This relatively informal specification of HAL is incomplete and still in
