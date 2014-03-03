@@ -210,7 +210,7 @@ that must be a direct property of a resource object:
 ```
 
 #### Link Relations
-Links have a relation (aka. 'rel'). This can be seen as the semantic -
+Links have a relation (aka. 'rel'). This indicates the semantic -
 the meaning - of a particular link.
 
 Link rels are the main way of distinguishing between a resource's links.
