@@ -263,7 +263,7 @@ clients.
 
 "CURIE"s help providing links to resource documentation.
 
-HAL gives you a reserved link relation 'curies' which you can use to define shortcuts to documentation.
+HAL gives you a reserved link relation 'curies' which you can use to hint at the location of resource documentation.
 
 ```javascript
 "_links": {
