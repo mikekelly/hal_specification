@@ -138,7 +138,7 @@ Links have:
   negotiation, etc.
 
 Below is an image that roughly illustrates how a HAL representation is
-structured: 
+structured:
 
 ![The HAL Information model][4]
 
@@ -158,7 +158,7 @@ documentation for a given link. This is what is known as
 read through documentation for the available links, and then
 follow-their-nose through the API.
 
-HAL encourages the use of link relations to: 
+HAL encourages the use of link relations to:
 
 *   Identify links and embedded resources within the representation
 *   Infer the expected structure and meaning of target resources
@@ -210,10 +210,13 @@ that must be a direct property of a resource object:
 ```
 
 #### Link Relations
-Links have a relation (aka. 'rel'). Link rels are the main way of
-distinguishing between a resource's links. It's basically just a key.
+Links have a relation (aka. 'rel'). This can be seen as the semantic -
+the meaning - of a particular link.
 
-Link relations are used as the keys within the `_links` hash:
+Link rels are the main way of distinguishing between a resource's links.
+
+It's basically just a key within the `_links` hash, associating the link meaning
+(the 'rel') with the link object that contains data like the actual 'href' value:
 
 ```javascript
 {
@@ -258,7 +261,7 @@ clients.
 
 ### CURIEs
 
-HAL gives you a reserved link relation 'curies' which you can 
+HAL gives you a reserved link relation 'curies' which you can
 
 ```javascript
 {
