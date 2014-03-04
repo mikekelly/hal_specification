@@ -138,7 +138,7 @@ Links have:
   negotiation, etc.
 
 Below is an image that roughly illustrates how a HAL representation is
-structured: 
+structured:
 
 ![The HAL Information model][4]
 
@@ -158,7 +158,7 @@ documentation for a given link. This is what is known as
 read through documentation for the available links, and then
 follow-their-nose through the API.
 
-HAL encourages the use of link relations to: 
+HAL encourages the use of link relations to:
 
 *   Identify links and embedded resources within the representation
 *   Infer the expected structure and meaning of target resources
@@ -210,10 +210,13 @@ that must be a direct property of a resource object:
 ```
 
 #### Link Relations
-Links have a relation (aka. 'rel'). Link rels are the main way of
-distinguishing between a resource's links. It's basically just a key.
+Links have a relation (aka. 'rel'). This indicates the semantic -
+the meaning - of a particular link.
 
-Link relations are used as the keys within the `_links` hash:
+Link rels are the main way of distinguishing between a resource's links.
+
+It's basically just a key within the `_links` hash, associating the link meaning
+(the 'rel') with the link object that contains data like the actual 'href' value:
 
 ```javascript
 {
@@ -258,15 +261,36 @@ clients.
 
 ### CURIEs
 
-HAL gives you a reserved link relation 'curies' which you can 
+"CURIE"s help providing links to resource documentation.
+
+HAL gives you a reserved link relation 'curies' which you can use to hint at the location of resource documentation.
 
 ```javascript
-{
-    "_links": {
-        "ex:widget": { "href": "/page=2" }
+"_links": {
+  "curies": [
+    {
+      "name": "doc",
+      "href": "http://haltalk.herokuapp.com/docs/{rel}",
+      "templated": true
     }
+  ],
+
+  "doc:latest-posts": {
+    "href": "/posts/latest"
+  }
 }
 ```
+
+There can be multiple links in the 'curies' section. They come with a 'name' and a templated 'href' which must
+contain the `{rel}` placeholder.
+
+Links in turn can then prefix their 'rel' with a CURIE name. Associating the `latest-posts` link with the `doc`
+documentation CURIE results in a link 'rel' set to `doc:latest-posts`.
+
+To retrieve documentation about the `latest-posts` resource, the client will expand the associated CURIE link
+with the actual link's 'rel'. This would result in a URL `http://haltalk.herokuapp.com/rels/latest-posts` which
+is expected to return documentation about this resource.
+
 
 ## To be continued...
 This relatively informal specification of HAL is incomplete and still in
@@ -284,7 +308,7 @@ an internet draft: [draft-kelly-json-hal][13].
 * Mark Derricutt
 * Herman Radtke
 * Will Hartung
-* Steve Klablik
+* Steve Klabnik
 * everyone on hal-discuss
 
 Thanks for the help :)
