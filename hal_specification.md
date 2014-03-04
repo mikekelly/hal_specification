@@ -288,7 +288,7 @@ Links in turn can then prefix their 'rel' with a CURIE name. Associating the `la
 documentation CURIE results in a link 'rel' set to `doc:latest-posts`.
 
 To retrieve documentation about the `latest-posts` resource, the client will expand the associated CURIE link
-with the actual link's 'rel'. This would result in a URL `http://haltalk.herokuapp.com/rels/latest-posts` which
+with the actual link's 'rel'. This would result in a URL `http://haltalk.herokuapp.com/docs/latest-posts` which
 is expected to return documentation about this resource.
 
 
