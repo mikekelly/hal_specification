@@ -185,7 +185,7 @@ An empty JSON object:
 ### Resources
 In most cases, resources should have a self URI
 
-Represened via a 'self' link:
+Represented via a 'self' link:
 
 ```javascript
 {
