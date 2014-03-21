@@ -44,7 +44,7 @@ your own format; you can adopt HAL's conventions and focus on building
 and documenting the data and transitions that make up your API.
 
 HAL is a little bit like HTML for machines, in that it is generic and
-designed to drive many different types of application via hyperlinks.
+designed to drive many different types of applications via hyperlinks.
 The difference is that HTML has features for helping 'human actors' move
 through a web application to achieve their goals, whereas HAL is
 intended for helping 'automated actors' move through a web API to
@@ -52,7 +52,7 @@ achieve their goals.
 
 Having said that, **HAL is actually very human-friendly too**. Its
 conventions make the documentation for an API discoverable from the API
-messages themselves.  This makes it possible for developers to jump
+messages themselves. This makes it possible for developers to jump
 straight into a HAL-based API and explore its capabilities, without the
 cognitive overhead of having to map some out-of-band documentation onto
 their journey.
@@ -165,7 +165,7 @@ HAL encourages the use of link relations to:
 *   Signalling what requests and representations can be submitted to target resources
 
 ## How to serve HAL
-HAL has a media type for both the JSON and XML variants, whos names are
+HAL has a media type for both the JSON and XML variants, whose names are
 `application/hal+json` and `application/hal+xml` respectively.
 
 When serving HAL over HTTP, the `Content-Type` of the response should
@@ -185,7 +185,7 @@ An empty JSON object:
 ### Resources
 In most cases, resources should have a self URI
 
-Represened via a 'self' link:
+Represented via a 'self' link:
 
 ```javascript
 {
@@ -198,7 +198,7 @@ Represened via a 'self' link:
 ### Links
 Links must be contained directly within a resource:
 
-Links are represented as JSON object contained within a `_links` hash
+Links are represented as a JSON object contained within a `_links` hash
 that must be a direct property of a resource object:
 
 ```javascript
@@ -228,11 +228,11 @@ It's basically just a key within the `_links` hash, associating the link meaning
 
 #### API Discoverability
 Link rels should be URLs which reveal documentation about the
-given link, making them "discoverable".  URLs are generally quite long
+given link, making them "discoverable". URLs are generally quite long
 and a bit nasty for use as keys. To get around this, HAL provides
 "CURIEs" which are basically named tokens that you can define in the
 document and use to express link relation URIs in a friendlier, more
-compact fashion i.e.  `ex:widget` instead of
+compact fashion i.e. `ex:widget` instead of
 `http://example.com/rels/widget`. The details are available in the
 section on CURIEs a bit further down.
 
