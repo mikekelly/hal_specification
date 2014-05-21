@@ -146,7 +146,7 @@ structured:
 HAL is designed for building APIs in which clients navigate around the
 resources by following links.
 
-Links are identfied by link realtions. Link realtions are the lifeblood
+Links are identfied by link relations. Link relations are the lifeblood
 of a hypermedia API: they are how you tell client developers about
 what resources are available and how they can be interacted with, and
 they are how the code they write will select which link to traverse.
