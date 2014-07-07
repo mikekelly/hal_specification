@@ -13,7 +13,7 @@ HAL is a simple format that gives a consistent and easy way to
 hyperlink between resources in your API.
 
 Adopting HAL will make your API explorable, and its documentation easily
-disocverable from within the API itself. In short, it will make your API
+discoverable from within the API itself. In short, it will make your API
 easier to work with and therefore more attractive to client developers.
 
 APIs that adopt HAL can be easily served and consumed using open source
@@ -146,7 +146,7 @@ structured:
 HAL is designed for building APIs in which clients navigate around the
 resources by following links.
 
-Links are identfied by link realtions. Link realtions are the lifeblood
+Links are identified by link relations. Link relations are the lifeblood
 of a hypermedia API: they are how you tell client developers about
 what resources are available and how they can be interacted with, and
 they are how the code they write will select which link to traverse.
@@ -185,7 +185,7 @@ An empty JSON object:
 ### Resources
 In most cases, resources should have a self URI
 
-Represened via a 'self' link:
+Represented via a 'self' link:
 
 ```javascript
 {
