@@ -60,7 +60,7 @@ their journey.
 ## Examples
 
 The example below is how you might represent a collection of orders with
-hal+json. Things to look for:
+vnd.hal+json. Things to look for:
 
 * The URI of the main resource being represented ('/orders') expressed
   with a self link
@@ -73,7 +73,7 @@ hal+json. Things to look for:
 * The compact URI (curie) named 'ea' for expanding the name of the
   links to their documentation URL
 
-### application/hal+json
+### application/vnd.hal+json
 ```javascript
 {
     "_links": {
@@ -166,7 +166,7 @@ HAL encourages the use of link relations to:
 
 ## How to serve HAL
 HAL has a media type for both the JSON and XML variants, whos names are
-`application/hal+json` and `application/hal+xml` respectively.
+`application/vnd.hal+json` and `vnd.application/vnd.hal+xml` respectively.
 
 When serving HAL over HTTP, the `Content-Type` of the response should
 contain the relevant media type name.
@@ -298,7 +298,7 @@ progress. For now, if you would like to have a full understanding please
 read the [formal specification][13].
 
 ## RFC
-The JSON variant of HAL (application/hal+json) has now been published as
+The JSON variant of HAL (application/vnd.hal+json) has now been published as
 an internet draft: [draft-kelly-json-hal][13].
 
 ## Acknowledgements
